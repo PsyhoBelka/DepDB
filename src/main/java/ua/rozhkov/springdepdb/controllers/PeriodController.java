@@ -32,7 +32,7 @@ public class PeriodController {
 
     @RequestMapping("/addNewPeriod")
     public String addNewPeriod(@ModelAttribute Period newPeriod) {
-        periodService.add(newPeriod);
+        periodService.save(newPeriod);
         return "redirect:/period/list";
     }
 
@@ -45,7 +45,7 @@ public class PeriodController {
 
     @RequestMapping("/updatePeriod")
     public String updatePeriod(@ModelAttribute Period periodToUpdate) {
-        periodService.update(periodToUpdate);
+        periodService.save(periodToUpdate);
         return "redirect:/period/list";
     }
 

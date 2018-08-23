@@ -30,21 +30,12 @@ public class CollegeService implements BaseService<College, Long> {
     }
 
     @Override
-    public Long add(College newCollege) {
-        return collegeRepository.save(newCollege).getId();
-    }
-
-    @Override
-    public Long update(College updatedCollege) {
-        return collegeRepository.saveAndFlush(updatedCollege).getId();
-    }
-
-    @Override
     public void deleteById(Long id) {
         collegeRepository.deleteById(id);
     }
 
+    @Override
     public College save(College college) {
-        return collegeRepository.save(college);
+        return collegeRepository.saveAndFlush(college);
     }
 }

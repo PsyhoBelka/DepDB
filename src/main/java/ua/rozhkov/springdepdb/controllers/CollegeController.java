@@ -6,12 +6,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import ua.rozhkov.springdepdb.DAO.entity.core.Base;
 import ua.rozhkov.springdepdb.DAO.entity.core.College;
 import ua.rozhkov.springdepdb.DAO.entity.core.OwnerShip;
 import ua.rozhkov.springdepdb.DAO.entity.core.Specialty;
 import ua.rozhkov.springdepdb.service.CollegeService;
-import ua.rozhkov.springdepdb.service.CollegeSpecialtyService;
 import ua.rozhkov.springdepdb.service.SpecialtyService;
 
 import java.util.ArrayList;
@@ -25,13 +23,11 @@ public class CollegeController {
     private CollegeService collegeService;
     private List<OwnerShip> collegeOwnerShips;
     private SpecialtyService specialtyService;
-    private CollegeSpecialtyService collegeSpecialtyService;
 
-    public CollegeController(CollegeService collegeService, SpecialtyService specialtyService, CollegeSpecialtyService collegeSpecialtyService) {
+    public CollegeController(CollegeService collegeService, SpecialtyService specialtyService) {
         this.collegeService = collegeService;
         collegeOwnerShips = Arrays.asList(OwnerShip.values());
         this.specialtyService = specialtyService;
-        this.collegeSpecialtyService = collegeSpecialtyService;
     }
 
     @RequestMapping("/list")
@@ -45,21 +41,19 @@ public class CollegeController {
         College newCollege = new College();
         model.addAttribute("ownerShips", collegeOwnerShips);
         model.addAttribute("newCollege", newCollege);
-        List<Specialty> specialities = specialtyService.findAll();
-        model.addAttribute("specialities", specialities);
+        List<Specialty> specialties = specialtyService.findAll();
+        model.addAttribute("specialties", specialties);
         return "college/addCollege";
     }
 
     @RequestMapping("/addNewCollege")
     public String addNewCollege(@ModelAttribute College newCollege,
-                                @RequestParam("checkedSpecialities") List<String> checkedSpecialities) {
+                                @RequestParam("checkedSpecialties") List<String> checkedSpecialities) {
         List<Specialty> checkedSpecialtyList = new ArrayList<>();
         for (String id :
                 checkedSpecialities) {
             checkedSpecialtyList.add(specialtyService.findById(Long.parseLong(id)));
         }
-        College tmpCollege = collegeService.save(newCollege);
-        collegeSpecialtyService.addSpecialitiesToCollege(tmpCollege, checkedSpecialities, 5, Base.NINE_CLASS);
         return "redirect:/college/list";
     }
 
@@ -73,7 +67,7 @@ public class CollegeController {
 
     @RequestMapping("/updateCollege")
     public String updateCollege(@ModelAttribute College collegeToUpdate) {
-        collegeService.update(collegeToUpdate);
+        collegeService.save(collegeToUpdate);
         return "redirect:/college/list";
     }
 

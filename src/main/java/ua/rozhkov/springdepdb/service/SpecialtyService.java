@@ -14,7 +14,6 @@ public class SpecialtyService implements BaseService<Specialty, Long> {
         this.specialtyRepository = specialtyRepository;
     }
 
-
     @Override
     public Specialty findById(Long id) {
         return specialtyRepository.findSpecialtyById(id);
@@ -31,13 +30,8 @@ public class SpecialtyService implements BaseService<Specialty, Long> {
     }
 
     @Override
-    public Long add(Specialty newSpecialty) {
-        return specialtyRepository.save(newSpecialty).getId();
-    }
-
-    @Override
-    public Long update(Specialty updatedSpecialty) {
-        return specialtyRepository.save(updatedSpecialty).getId();
+    public Specialty save(Specialty specialty) {
+        return specialtyRepository.saveAndFlush(specialty);
     }
 
     @Override

@@ -1,19 +1,17 @@
 package ua.rozhkov.springdepdb.DAO.entity.core;
 
 import javax.persistence.*;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
 @Table(name = "period")
 public class Period {
 
-    @Id
-    @Column(name = "id", unique = true)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
-    @Column(name = "name")
     private String name;
+    private List<College> colleges=new LinkedList<>();
 
     public Period() {
     }
@@ -22,6 +20,9 @@ public class Period {
         this.name = name;
     }
 
+    @Id
+    @Column(name = "id", unique = true)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public long getId() {
         return id;
     }
@@ -30,12 +31,23 @@ public class Period {
         this.id = id;
     }
 
+    @Column(name = "name")
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @OneToMany
+    @JoinColumn(name = "period_id")
+    public List<College> getColleges() {
+        return colleges;
+    }
+
+    public void setColleges(List<College> colleges) {
+        this.colleges = colleges;
     }
 
     @Override

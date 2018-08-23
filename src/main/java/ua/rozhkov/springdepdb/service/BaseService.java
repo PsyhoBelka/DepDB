@@ -9,9 +9,7 @@ public interface BaseService<T, ID> {
 
     T findByName(String name);
 
-    ID add(T object);
-
-    ID update(T newObject);
+    T save(T object);
 
     void deleteById(ID id);
 }

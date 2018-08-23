@@ -33,7 +33,7 @@ public class SpecialtyController {
 
     @RequestMapping("/addNewSpecialty")
     public String addNewSpecialty(@ModelAttribute Specialty newSpecialty) {
-        specialtyService.add(newSpecialty);
+        specialtyService.save(newSpecialty);
         return "redirect:/specialty/list";
     }
 
@@ -46,7 +46,7 @@ public class SpecialtyController {
 
     @RequestMapping("/updateSpecialty")
     public String updateSpecialty(@ModelAttribute Specialty specialtyToUpdate) {
-        specialtyService.update(specialtyToUpdate);
+        specialtyService.save(specialtyToUpdate);
         return "redirect:/specialty/list";
     }
 

@@ -1,7 +1,6 @@
 package ua.rozhkov.springdepdb.DAO.entity.core;
 
 import org.hibernate.annotations.GenericGenerator;
-import ua.rozhkov.springdepdb.DAO.entity.CollegeSpecialty;
 
 import javax.persistence.*;
 import java.util.LinkedList;
@@ -15,16 +14,16 @@ public class Specialty {
     private Long id;
     private String name;
     private String code;
-    private List<CollegeSpecialty> colleges = new LinkedList<>();
+    private List<College> colleges=new LinkedList<>();
     private List<LicenseCapacity> licenses = new LinkedList<>();
+    private List<RealCapacity> reals = new LinkedList<>();
+
+    public Specialty() {
+    }
 
     public Specialty(String name, String code) {
         this.name = name;
         this.code = code;
-    }
-
-    public Specialty() {
-
     }
 
     @Id
@@ -57,17 +56,21 @@ public class Specialty {
         this.code = code;
     }
 
-    @OneToMany(mappedBy = "primaryKey.specialty", cascade = CascadeType.ALL)
-    public List<CollegeSpecialty> getColleges() {
+    @ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,
+            CascadeType.PERSIST,CascadeType.REFRESH})
+    @JoinTable(name = "colleges_specialties",
+    joinColumns = @JoinColumn(name = "specialty_id"),
+    inverseJoinColumns = @JoinColumn(name = "college_id"))
+    public List<College> getColleges() {
         return colleges;
     }
 
-    public void setColleges(List<CollegeSpecialty> colleges) {
+    public void setColleges(List<College> colleges) {
         this.colleges = colleges;
     }
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "license_id")
+    @JoinColumn(name = "specialty_id")
     public List<LicenseCapacity> getLicenses() {
         return licenses;
     }
@@ -76,12 +79,22 @@ public class Specialty {
         this.licenses = licenses;
     }
 
-    public void addCollege(CollegeSpecialty collegeSpecialty) {
-        this.getColleges().add(collegeSpecialty);
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "specialty_id")
+    public List<RealCapacity> getReals() {
+        return reals;
+    }
+
+    public void setReals(List<RealCapacity> reals) {
+        this.reals = reals;
     }
 
     public void addLicenseCapacity(LicenseCapacity licenseCapacity) {
         this.getLicenses().add(licenseCapacity);
+    }
+
+    public void addReals(RealCapacity realCapacity) {
+        this.getReals().add(realCapacity);
     }
 
     @Override

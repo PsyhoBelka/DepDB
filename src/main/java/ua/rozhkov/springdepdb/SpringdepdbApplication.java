@@ -21,8 +21,8 @@ public class SpringdepdbApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        specialtyService.add(new Specialty("111", "111"));
-        specialtyService.add(new Specialty("222", "222"));
+        specialtyService.save(new Specialty("111", "111"));
+        specialtyService.save(new Specialty("222", "222"));
     }
 
     /* @Bean

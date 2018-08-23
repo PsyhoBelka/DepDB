@@ -1,7 +1,6 @@
 package ua.rozhkov.springdepdb.DAO.entity.core;
 
 import org.hibernate.annotations.GenericGenerator;
-import ua.rozhkov.springdepdb.DAO.entity.CollegeSpecialty;
 
 import javax.persistence.*;
 import java.util.LinkedList;
@@ -18,7 +17,7 @@ public class College {
     private String director;
     private String phone;
     private OwnerShip ownerShip;
-    private List<CollegeSpecialty> specialities = new LinkedList<>();
+    private List<Specialty> specialties = new LinkedList<>();
 
     public College() {
     }
@@ -89,17 +88,21 @@ public class College {
         this.ownerShip = ownerShip;
     }
 
-    @OneToMany(mappedBy = "primaryKey.college", cascade = CascadeType.ALL)
-    public List<CollegeSpecialty> getSpecialities() {
-        return specialities;
+    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE,
+            CascadeType.PERSIST, CascadeType.REFRESH})
+    @JoinTable(name = "colleges_specialties",
+            joinColumns = @JoinColumn(name = "college_id"),
+            inverseJoinColumns = @JoinColumn(name = "specialty_id"))
+    public List<Specialty> getSpecialties() {
+        return specialties;
     }
 
-    public void setSpecialities(List<CollegeSpecialty> specialities) {
-        this.specialities = specialities;
+    public void setSpecialties(List<Specialty> specialties) {
+        this.specialties = specialties;
     }
 
-    public void addSpecialty(CollegeSpecialty collegeSpeciality) {
-        this.getSpecialities().add(collegeSpeciality);
+    public void addSpecialty(Specialty specialty) {
+        this.getSpecialties().add(specialty);
     }
 
     @Override
@@ -113,27 +116,4 @@ public class College {
                 ']';
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof College)) return false;
-
-        College college = (College) o;
-
-        if (!name.equals(college.name)) return false;
-        if (!address.equals(college.address)) return false;
-        if (!director.equals(college.director)) return false;
-        if (!phone.equals(college.phone)) return false;
-        return ownerShip == college.ownerShip;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = name.hashCode();
-        result = 31 * result + address.hashCode();
-        result = 31 * result + director.hashCode();
-        result = 31 * result + phone.hashCode();
-        result = 31 * result + ownerShip.hashCode();
-        return result;
-    }
 }

@@ -30,13 +30,8 @@ public class PeriodService implements BaseService<Period, Long> {
     }
 
     @Override
-    public Long add(Period newPeriod) {
-        return periodRepository.save(newPeriod).getId();
-    }
-
-    @Override
-    public Long update(Period updatedPeriod) {
-        return periodRepository.save(updatedPeriod).getId();
+    public Period save(Period period) {
+        return periodRepository.saveAndFlush(period);
     }
 
     @Override
