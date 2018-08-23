@@ -1,0 +1,36 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>List of specialities</title>
+</head>
+<body style="background-color: palegoldenrod;">
+<h2 align="center">
+    List of specialities
+</h2>
+<div>
+    <table style="margin-left: auto; margin-right: auto;" border="1">
+        <tbody>
+        <tr>
+            <th style="width: 100px; text-align: center;" hidden>Id</th>
+            <th style="width: 400px; text-align: center;">Code</th>
+            <th style="width: 400px; text-align: center;">Name</th>
+            <th style="width: 100px; text-align: center;" colspan="2">Actions&nbsp;</th>
+        </tr>
+        <tr th:each="specialty:${specialities}">
+            <td th:utext="${specialty.id}" style="text-align: center;">1</td>
+            <td th:utext="${specialty.code}">Code</td>
+            <td th:utext="${specialty.name}">Name</td>
+            <td style="width: 50px; text-align: center;"><a th:href="@{/specialty/edit/__${specialty.id}__}"
+                                                            href="listSpecialty.html">edit</a></td>
+            <td style="width: 50px; text-align: center;"><a th:href="@{/specialty/delete/__${specialty.id}__}"
+                                                            href="listSpecialty.html">delete</a></td>
+        </tr>
+        <tr>
+            <td style="text-align: right;" colspan="8"><a href="/specialty/add">+Add new specialty+</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<p align="center"><a href="/"> Back to home</a></p>
+</body>
+</html>

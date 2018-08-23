@@ -1,0 +1,18 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add new specialty</title>
+</head>
+<body style="background-color: palegoldenrod;">
+<h2 align="center">
+    Adding new college
+</h2>
+<p align="center"><a href="/">(Back to home)</a></p>
+<form id="newSpecialty" action="#" th:action="@{/specialty/addNewSpecialty}" th:object="${newSpecialty}"
+      method="post">
+    <p>Code: <input type="text" th:field="*{code}"/></p>
+    <p>Name: <input type="text" th:field="*{name}"/></p>
+    <p><input type="submit" value="Submit"/> <input type="reset" value="Reset"/></p>
+</form>
+</body>
+</html>

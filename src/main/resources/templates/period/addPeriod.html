@@ -1,0 +1,16 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add new college</title>
+</head>
+<body style="background-color: palegoldenrod;">
+<h2 align="center">
+    Adding new period
+</h2>
+<form id="newPeriod" action="#" th:action="@{/period/addNewPeriod}" th:object="${newPeriod}" method="post">
+    <input type="text" th:field="*{id}" readonly/>
+    <p>Name: <input type="text" th:field="*{name}"/></p>
+    <p><input type="submit" value="Submit"/> <input type="reset" value="Reset"/></p>
+</form>
+</body>
+</html>

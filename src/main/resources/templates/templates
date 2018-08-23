@@ -1,0 +1,32 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<table style="margin-left: auto; margin-right: auto;" border="1">
+        <tbody>
+        <tr>
+            <th style="width: 50px; text-align: center;" hidden="hidden">Id</th>
+            <th style="width: 400px; text-align: center;">Name</th>
+            <th style="width: 300px; text-align: center;">Address</th>
+            <th style="width: 200px; text-align: center;">Director</th>
+            <th style="width: 120px; text-align: center;">Phone</th>
+            <th style="width: 120px; text-align: center;">OwnerShip</th>
+            <th style="width: 100px; text-align: center;" colspan="2">Actions&nbsp;</th>
+        </tr>
+        <tr th:each="college:${colleges}">
+            <td th:utext="${college.id}" style="text-align: center;" hidden="hidden">1</td>
+            <td th:utext="${college.name}">Name</td>
+            <td th:utext="${college.address}">Address</td>
+            <td th:utext="${college.director}">Director</td>
+            <td th:utext="${college.phone}" style="text-align: center;">+38-066-429-69-02</td>
+            <td th:utext="${college.ownerShip.getString()}" style="text-align: center;">OwnerShip</td>
+            <td style="width: 50px; text-align: center;"><a th:href="@{/college/edit/__${college.id}__}" href="listColleges.html">edit</a></td>
+            <td style="width: 50px; text-align: center;"><a th:href="@{/college/delete/__${college.id}__}" href="listColleges.html">delete</a></td>
+        </tr>
+        <tr>
+            <td style="text-align: right;" colspan="8"><a href="/college/add">+Add new college+</a></td>
+        </tr>
+        </tbody>
+    </table>
+#=====================================================================================================#
+@GeneratedValue(generator="increment")
+@GenericGenerator(name="increment", strategy = "increment")
+#=====================================================================================================#
