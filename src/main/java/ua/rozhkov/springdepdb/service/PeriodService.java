@@ -51,22 +51,24 @@ public class PeriodService implements BaseService<Period, Long> {
         }
     }
 
+    private List<College> getCollegesByIdsArray(String[] ids, PeriodFormDTO sourcePeriodFormDTO) {
+        List<College> selectedColleges = new ArrayList<>();
+        for (int i = 0; i < sourcePeriodFormDTO.getSelectedColleges().length; i++) {
+            selectedColleges.add(collegeService.findById(Long.parseLong(sourcePeriodFormDTO.getSelectedColleges()[i])));
+        }
+        return selectedColleges;
+    }
+
     public PeriodFormDTO preparePeriodFormDTOToAdd() {
         PeriodFormDTO periodFormDTO = new PeriodFormDTO();
         periodFormDTO.setColleges(collegeService.findAll());
-//        String[] str={"2"};
-//        periodFormDTO.setSelectedColleges(str);
         return periodFormDTO;
     }
 
-    public Period perfomPeriodFormDTO(PeriodFormDTO newPeriodFormDTO) {
+    public Period perfomPeriodFormDTOAdd(PeriodFormDTO newPeriodFormDTO) {
         Period newPeriod=new Period();
         newPeriod.setName(newPeriodFormDTO.getName());
-        List<College> selectedColleges=new ArrayList<>();
-        for (int i = 0; i < newPeriodFormDTO.getSelectedColleges().length; i++) {
-            selectedColleges.add(collegeService.findById(Long.parseLong(newPeriodFormDTO.getSelectedColleges()[i])));
-        }
-        newPeriod.setColleges(selectedColleges);
+        newPeriod.setColleges(getCollegesByIdsArray(newPeriodFormDTO.getSelectedColleges(), newPeriodFormDTO));
         periodRepository.saveAndFlush(newPeriod);
         return newPeriod;
     }
@@ -78,5 +80,14 @@ public class PeriodService implements BaseService<Period, Long> {
         periodFormDTOToEdit.setColleges(collegeService.findAll());
         periodFormDTOToEdit.setSelectedColleges(editPeriodToEdit.colegesIdsToStrindArray());
         return periodFormDTOToEdit;
+    }
+
+    public Period perfomPeriodFormDTOEdit(PeriodFormDTO periodFormDTOToUpdate) {
+        Period periodToUpdate = new Period();
+        periodToUpdate.setId(periodFormDTOToUpdate.getId());
+        periodToUpdate.setName(periodFormDTOToUpdate.getName());
+        periodToUpdate.setColleges(getCollegesByIdsArray(periodFormDTOToUpdate.getSelectedColleges(), periodFormDTOToUpdate));
+        periodRepository.saveAndFlush(periodToUpdate);
+        return periodToUpdate;
     }
 }

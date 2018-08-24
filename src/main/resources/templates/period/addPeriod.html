@@ -7,7 +7,7 @@
 <h2 align="center">
     Adding new period
 </h2>
-<form id="newPeriod" action="#" th:action="@{/period/addNewPeriod}" th:object="${periodFormDTOToAdd}" method="post">
+<form id="newPeriod" action="#" th:action="@{/period/addPeriod}" th:object="${periodFormDTOToAdd}" method="post">
     <p>Name: <input type="text" th:field="*{name}"/></p>
     <p>Select specialties here:
     <ul>

@@ -31,9 +31,9 @@ public class PeriodController {
         return "period/addPeriod";
     }
 
-    @RequestMapping("/addNewPeriod")
-    public String addNewPeriod(@ModelAttribute PeriodFormDTO periodFormDTOToAdd) {
-        periodService.perfomPeriodFormDTO(periodFormDTOToAdd);
+    @RequestMapping("/addPeriod")
+    public String addPeriod(@ModelAttribute PeriodFormDTO periodFormDTOToAdd) {
+        periodService.perfomPeriodFormDTOAdd(periodFormDTOToAdd);
 //        periodService.addColleges(checkedColleges, newPeriod);
 //        periodService.save(newPeriod);
         return "redirect:/period/list";
@@ -42,14 +42,13 @@ public class PeriodController {
     @RequestMapping("/edit/{id}")
     public String showEditPage(@PathVariable long id, Model model) {
         Period periodToUpdate = periodService.findById(id);
-        model.addAttribute("periodToUpdate", periodService.preparePeriodFormDTOToEdit(periodToUpdate));
+        model.addAttribute("periodFormDTOToEdit", periodService.preparePeriodFormDTOToEdit(periodToUpdate));
         return "period/editPeriod";
     }
 
-    //todo
-    @RequestMapping("/updatePeriod")
-    public String updatePeriod(@ModelAttribute Period periodToUpdate) {
-        periodService.save(periodToUpdate);
+    @RequestMapping("/editPeriod")
+    public String editPeriod(@ModelAttribute PeriodFormDTO periodFormDTOToEdit) {
+        periodService.perfomPeriodFormDTOEdit(periodFormDTOToEdit);
         return "redirect:/period/list";
     }
 
