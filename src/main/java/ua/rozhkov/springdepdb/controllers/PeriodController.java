@@ -1,21 +1,27 @@
 package ua.rozhkov.springdepdb.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import ua.rozhkov.springdepdb.DAO.entity.core.Period;
+import org.springframework.web.bind.annotation.RequestParam;
+import ua.rozhkov.springdepdb.DAO.entity.College;
+import ua.rozhkov.springdepdb.DAO.entity.Period;
+import ua.rozhkov.springdepdb.FormDTO.college.AddPeriodForm;
+import ua.rozhkov.springdepdb.service.CollegeService;
 import ua.rozhkov.springdepdb.service.PeriodService;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/period")
 public class PeriodController {
+    @Autowired
     private PeriodService periodService;
-
-    public PeriodController(PeriodService periodService) {
-        this.periodService = periodService;
-    }
+    @Autowired
+    private CollegeService collegeService;
 
     @RequestMapping("/list")
     public String showListPeriodsPage(Model model) {
@@ -25,14 +31,15 @@ public class PeriodController {
 
     @RequestMapping("/add")
     public String showAddPeriodPage(Model model) {
-        Period newPeriod = new Period();
-        model.addAttribute("newPeriod", newPeriod);
+        model.addAttribute("addPeriodForm", periodService.prepareAddPeriodForm());
         return "period/addPeriod";
     }
 
     @RequestMapping("/addNewPeriod")
-    public String addNewPeriod(@ModelAttribute Period newPeriod) {
-        periodService.save(newPeriod);
+    public String addNewPeriod(@ModelAttribute AddPeriodForm addPeriodForm) {
+        periodService.perfomAddPeriodForm(addPeriodForm);
+//        periodService.addColleges(checkedColleges, newPeriod);
+//        periodService.save(newPeriod);
         return "redirect:/period/list";
     }
 

@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import ua.rozhkov.springdepdb.DAO.entity.core.College;
-import ua.rozhkov.springdepdb.DAO.entity.core.OwnerShip;
-import ua.rozhkov.springdepdb.DAO.entity.core.Specialty;
+import ua.rozhkov.springdepdb.DAO.entity.College;
+import ua.rozhkov.springdepdb.DAO.entity.OwnerShip;
+import ua.rozhkov.springdepdb.DAO.entity.Specialty;
 import ua.rozhkov.springdepdb.service.CollegeService;
 import ua.rozhkov.springdepdb.service.SpecialtyService;
 

@@ -1,4 +1,4 @@
-package ua.rozhkov.springdepdb.DAO.entity.core;
+package ua.rozhkov.springdepdb.DAO.entity;
 
 import javax.persistence.*;
 import java.util.LinkedList;
@@ -11,7 +11,7 @@ public class Period {
 
     private long id;
     private String name;
-    private List<College> colleges=new LinkedList<>();
+    private List<College> colleges = new LinkedList<>();
 
     public Period() {
     }
@@ -40,7 +40,7 @@ public class Period {
         this.name = name;
     }
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "period_id")
     public List<College> getColleges() {
         return colleges;
@@ -48,6 +48,10 @@ public class Period {
 
     public void setColleges(List<College> colleges) {
         this.colleges = colleges;
+    }
+
+    public void addCollege(College college) {
+        this.getColleges().add(college);
     }
 
     @Override

@@ -1,7 +1,7 @@
 package ua.rozhkov.springdepdb.service;
 
 import org.springframework.stereotype.Service;
-import ua.rozhkov.springdepdb.DAO.entity.core.College;
+import ua.rozhkov.springdepdb.DAO.entity.College;
 import ua.rozhkov.springdepdb.DAO.repository.CollegeRepository;
 
 import java.util.List;

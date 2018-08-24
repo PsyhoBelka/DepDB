@@ -1,18 +1,22 @@
 package ua.rozhkov.springdepdb.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ua.rozhkov.springdepdb.DAO.entity.core.Period;
+import ua.rozhkov.springdepdb.DAO.entity.College;
+import ua.rozhkov.springdepdb.DAO.entity.Period;
 import ua.rozhkov.springdepdb.DAO.repository.PeriodRepository;
+import ua.rozhkov.springdepdb.FormDTO.college.AddPeriodForm;
 
 import java.util.List;
 
 @Service
 public class PeriodService implements BaseService<Period, Long> {
+    @Autowired
     private PeriodRepository periodRepository;
 
-    public PeriodService(PeriodRepository periodRepository) {
-        this.periodRepository = periodRepository;
-    }
+    @Autowired
+    private CollegeService collegeService;
+
 
     @Override
     public Period findById(Long id) {
@@ -37,5 +41,27 @@ public class PeriodService implements BaseService<Period, Long> {
     @Override
     public void deleteById(Long id) {
         periodRepository.deleteById(id);
+    }
+
+    public void addColleges(List<College> colleges, Period periodToAdd) {
+        for (College college :
+                colleges) {
+            periodToAdd.addCollege(college);
+        }
+    }
+
+    public AddPeriodForm prepareAddPeriodForm() {
+        AddPeriodForm addPeriodForm=new AddPeriodForm();
+        addPeriodForm.setColleges(collegeService.findAll());
+        String[] str={"2"};
+        addPeriodForm.setSelectedColleges(str);
+        return addPeriodForm;
+    }
+
+    public Period perfomAddPeriodForm (AddPeriodForm addPeriodForm) {
+        Period newPeriod=new Period();
+        newPeriod.setName(addPeriodForm.getName());
+//        newPeriod.se
+        return null;
     }
 }

@@ -1,7 +1,7 @@
 package ua.rozhkov.springdepdb.service;
 
 import org.springframework.stereotype.Service;
-import ua.rozhkov.springdepdb.DAO.entity.core.Specialty;
+import ua.rozhkov.springdepdb.DAO.entity.Specialty;
 import ua.rozhkov.springdepdb.DAO.repository.SpecialtyRepository;
 
 import java.util.List;

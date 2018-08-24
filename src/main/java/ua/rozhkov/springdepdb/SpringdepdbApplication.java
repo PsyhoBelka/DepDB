@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import ua.rozhkov.springdepdb.DAO.entity.core.Specialty;
+import ua.rozhkov.springdepdb.DAO.entity.College;
+import ua.rozhkov.springdepdb.DAO.entity.OwnerShip;
+import ua.rozhkov.springdepdb.DAO.entity.Specialty;
 import ua.rozhkov.springdepdb.service.CollegeService;
 import ua.rozhkov.springdepdb.service.SpecialtyService;
 
@@ -23,6 +25,10 @@ public class SpringdepdbApplication implements CommandLineRunner {
     public void run(String... args) throws Exception {
         specialtyService.save(new Specialty("111", "111"));
         specialtyService.save(new Specialty("222", "222"));
+
+        collegeService.save(new College("111","111","111","111", OwnerShip.COMMUN));
+        collegeService.save(new College("222","222","222","222", OwnerShip.COMMUN));
+        collegeService.save(new College("333","333","333","333", OwnerShip.GOVEM));
     }
 
     /* @Bean
