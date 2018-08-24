@@ -7,6 +7,7 @@ import ua.rozhkov.springdepdb.DAO.entity.Period;
 import ua.rozhkov.springdepdb.DAO.repository.PeriodRepository;
 import ua.rozhkov.springdepdb.FormDTO.college.AddPeriodForm;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -53,15 +54,20 @@ public class PeriodService implements BaseService<Period, Long> {
     public AddPeriodForm prepareAddPeriodForm() {
         AddPeriodForm addPeriodForm=new AddPeriodForm();
         addPeriodForm.setColleges(collegeService.findAll());
-        String[] str={"2"};
-        addPeriodForm.setSelectedColleges(str);
+//        String[] str={"2"};
+//        addPeriodForm.setSelectedColleges(str);
         return addPeriodForm;
     }
 
     public Period perfomAddPeriodForm (AddPeriodForm addPeriodForm) {
         Period newPeriod=new Period();
         newPeriod.setName(addPeriodForm.getName());
-//        newPeriod.se
-        return null;
+        List<College> selectedColleges=new ArrayList<>();
+        for (int i = 0; i < addPeriodForm.getSelectedColleges().length; i++) {
+            selectedColleges.add(collegeService.findById(Long.parseLong(addPeriodForm.getSelectedColleges()[i])));
+        }
+        newPeriod.setColleges(selectedColleges);
+        periodRepository.saveAndFlush(newPeriod);
+        return newPeriod;
     }
 }
