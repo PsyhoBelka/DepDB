@@ -36,6 +36,7 @@ public class CollegeController {
         return "college/listColleges";
     }
 
+    //todo
     @RequestMapping("/add")
     public String showAddCollegePage(Model model) {
         College newCollege = new College();
@@ -46,6 +47,7 @@ public class CollegeController {
         return "college/addCollege";
     }
 
+    //todo
     @RequestMapping("/addNewCollege")
     public String addNewCollege(@ModelAttribute College newCollege,
                                 @RequestParam("checkedSpecialties") List<String> checkedSpecialities) {
@@ -57,6 +59,7 @@ public class CollegeController {
         return "redirect:/college/list";
     }
 
+    //todo
     @RequestMapping("/edit/{id}")
     public String showEditPage(@PathVariable long id, Model model) {
         model.addAttribute("ownerShips", collegeOwnerShips);
@@ -65,6 +68,7 @@ public class CollegeController {
         return "college/editCollege";
     }
 
+    //todo
     @RequestMapping("/updateCollege")
     public String updateCollege(@ModelAttribute College collegeToUpdate) {
         collegeService.save(collegeToUpdate);

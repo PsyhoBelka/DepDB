@@ -1,11 +1,11 @@
-package ua.rozhkov.springdepdb.FormDTO.college;
+package ua.rozhkov.springdepdb.FormDTO;
 
 import ua.rozhkov.springdepdb.DAO.entity.OwnerShip;
 import ua.rozhkov.springdepdb.DAO.entity.Specialty;
 
 import java.util.List;
 
-public class AddCollegeForm {
+public class CollegeFormDTO {
     private String name;
     private String address;
     private String director;
@@ -14,11 +14,11 @@ public class AddCollegeForm {
     private String[] selectedSpecialties;
     private List<Specialty> specialties;
 
-    public AddCollegeForm() {
+    public CollegeFormDTO() {
 
     }
 
-    public AddCollegeForm(String name, String address, String director, String phone, OwnerShip ownerShip) {
+    public CollegeFormDTO(String name, String address, String director, String phone, OwnerShip ownerShip) {
         this.name = name;
         this.address = address;
         this.director = director;

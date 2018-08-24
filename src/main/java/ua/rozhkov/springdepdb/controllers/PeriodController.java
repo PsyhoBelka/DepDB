@@ -6,14 +6,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import ua.rozhkov.springdepdb.DAO.entity.College;
 import ua.rozhkov.springdepdb.DAO.entity.Period;
-import ua.rozhkov.springdepdb.FormDTO.college.AddPeriodForm;
+import ua.rozhkov.springdepdb.FormDTO.PeriodFormDTO;
 import ua.rozhkov.springdepdb.service.CollegeService;
 import ua.rozhkov.springdepdb.service.PeriodService;
-
-import java.util.List;
 
 @Controller
 @RequestMapping("/period")
@@ -31,13 +27,13 @@ public class PeriodController {
 
     @RequestMapping("/add")
     public String showAddPeriodPage(Model model) {
-        model.addAttribute("addPeriodForm", periodService.prepareAddPeriodForm());
+        model.addAttribute("periodFormDTOToAdd", periodService.preparePeriodFormDTOToAdd());
         return "period/addPeriod";
     }
 
     @RequestMapping("/addNewPeriod")
-    public String addNewPeriod(@ModelAttribute AddPeriodForm addPeriodForm) {
-        periodService.perfomAddPeriodForm(addPeriodForm);
+    public String addNewPeriod(@ModelAttribute PeriodFormDTO periodFormDTOToAdd) {
+        periodService.perfomPeriodFormDTO(periodFormDTOToAdd);
 //        periodService.addColleges(checkedColleges, newPeriod);
 //        periodService.save(newPeriod);
         return "redirect:/period/list";
@@ -46,10 +42,11 @@ public class PeriodController {
     @RequestMapping("/edit/{id}")
     public String showEditPage(@PathVariable long id, Model model) {
         Period periodToUpdate = periodService.findById(id);
-        model.addAttribute("periodToUpdate", periodToUpdate);
+        model.addAttribute("periodToUpdate", periodService.preparePeriodFormDTOToEdit(periodToUpdate));
         return "period/editPeriod";
     }
 
+    //todo
     @RequestMapping("/updatePeriod")
     public String updatePeriod(@ModelAttribute Period periodToUpdate) {
         periodService.save(periodToUpdate);

@@ -54,6 +54,16 @@ public class Period {
         this.getColleges().add(college);
     }
 
+    public String[] colegesIdsToStrindArray() {
+        String[] ids = new String[colleges.size()];
+        int i = 0;
+        for (College college :
+                colleges) {
+            ids[i++] = String.valueOf(college.getId());
+        }
+        return ids;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

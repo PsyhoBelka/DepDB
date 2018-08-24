@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import ua.rozhkov.springdepdb.DAO.entity.College;
 import ua.rozhkov.springdepdb.DAO.entity.Period;
 import ua.rozhkov.springdepdb.DAO.repository.PeriodRepository;
-import ua.rozhkov.springdepdb.FormDTO.college.AddPeriodForm;
+import ua.rozhkov.springdepdb.FormDTO.PeriodFormDTO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,23 +51,32 @@ public class PeriodService implements BaseService<Period, Long> {
         }
     }
 
-    public AddPeriodForm prepareAddPeriodForm() {
-        AddPeriodForm addPeriodForm=new AddPeriodForm();
-        addPeriodForm.setColleges(collegeService.findAll());
+    public PeriodFormDTO preparePeriodFormDTOToAdd() {
+        PeriodFormDTO periodFormDTO = new PeriodFormDTO();
+        periodFormDTO.setColleges(collegeService.findAll());
 //        String[] str={"2"};
-//        addPeriodForm.setSelectedColleges(str);
-        return addPeriodForm;
+//        periodFormDTO.setSelectedColleges(str);
+        return periodFormDTO;
     }
 
-    public Period perfomAddPeriodForm (AddPeriodForm addPeriodForm) {
+    public Period perfomPeriodFormDTO(PeriodFormDTO newPeriodFormDTO) {
         Period newPeriod=new Period();
-        newPeriod.setName(addPeriodForm.getName());
+        newPeriod.setName(newPeriodFormDTO.getName());
         List<College> selectedColleges=new ArrayList<>();
-        for (int i = 0; i < addPeriodForm.getSelectedColleges().length; i++) {
-            selectedColleges.add(collegeService.findById(Long.parseLong(addPeriodForm.getSelectedColleges()[i])));
+        for (int i = 0; i < newPeriodFormDTO.getSelectedColleges().length; i++) {
+            selectedColleges.add(collegeService.findById(Long.parseLong(newPeriodFormDTO.getSelectedColleges()[i])));
         }
         newPeriod.setColleges(selectedColleges);
         periodRepository.saveAndFlush(newPeriod);
         return newPeriod;
+    }
+
+    public PeriodFormDTO preparePeriodFormDTOToEdit(Period editPeriodToEdit) {
+        PeriodFormDTO periodFormDTOToEdit = new PeriodFormDTO();
+        periodFormDTOToEdit.setId(editPeriodToEdit.getId());
+        periodFormDTOToEdit.setName(editPeriodToEdit.getName());
+        periodFormDTOToEdit.setColleges(collegeService.findAll());
+        periodFormDTOToEdit.setSelectedColleges(editPeriodToEdit.colegesIdsToStrindArray());
+        return periodFormDTOToEdit;
     }
 }

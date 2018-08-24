@@ -1,20 +1,20 @@
-package ua.rozhkov.springdepdb.FormDTO.college;
+package ua.rozhkov.springdepdb.FormDTO;
 
 import ua.rozhkov.springdepdb.DAO.entity.College;
 
 import java.util.LinkedList;
 import java.util.List;
 
-public class AddPeriodForm {
+public class PeriodFormDTO {
     private Long id;
     private String name;
     private String[] selectedColleges;
     private List<College> colleges=new LinkedList<>();
 
-    public AddPeriodForm() {
+    public PeriodFormDTO() {
     }
 
-    public AddPeriodForm(String name, List<College> colleges) {
+    public PeriodFormDTO(String name, List<College> colleges) {
         this.name = name;
         this.colleges = colleges;
     }

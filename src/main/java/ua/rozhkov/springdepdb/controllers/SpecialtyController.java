@@ -24,6 +24,7 @@ public class SpecialtyController {
         return "specialty/listSpecialty";
     }
 
+    //todo
     @RequestMapping("/add")
     public String showAddSpecialtyPage(Model model) {
         Specialty newSpecialty = new Specialty();
@@ -31,12 +32,14 @@ public class SpecialtyController {
         return "addSpecialty";
     }
 
+    //todo
     @RequestMapping("/addNewSpecialty")
     public String addNewSpecialty(@ModelAttribute Specialty newSpecialty) {
         specialtyService.save(newSpecialty);
         return "redirect:/specialty/list";
     }
 
+    //todo
     @RequestMapping("/edit/{id}")
     public String showEditPage(@PathVariable long id, Model model) {
         Specialty specialtyToUpdate = specialtyService.findById(id);
@@ -44,6 +47,7 @@ public class SpecialtyController {
         return "editSpecialty";
     }
 
+    //todo
     @RequestMapping("/updateSpecialty")
     public String updateSpecialty(@ModelAttribute Specialty specialtyToUpdate) {
         specialtyService.save(specialtyToUpdate);

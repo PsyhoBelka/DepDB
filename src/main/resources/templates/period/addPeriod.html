@@ -7,11 +7,9 @@
 <h2 align="center">
     Adding new period
 </h2>
-<form id="newPeriod" action="#" th:action="@{/period/addNewPeriod}" th:object="${addPeriodForm}" method="post">
-    <!--<input type="text" th:field="*{id}" readonly/>-->
+<form id="newPeriod" action="#" th:action="@{/period/addNewPeriod}" th:object="${periodFormDTOToAdd}" method="post">
     <p>Name: <input type="text" th:field="*{name}"/></p>
-    <p><input type="submit" value="Submit"/> <input type="reset" value="Reset"/></p>
-    <p>Choose specialties here:
+    <p>Select specialties here:
     <ul>
         <li th:each="college: *{colleges}">
             <input type="checkbox"
@@ -23,6 +21,7 @@
         </li>
     </ul>
     </p>
+    <p><input type="submit" value="Submit"/> <input type="reset" value="Reset"/></p>
 </form>
 </body>
 </html>
