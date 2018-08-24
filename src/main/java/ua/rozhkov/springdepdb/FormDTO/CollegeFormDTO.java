@@ -3,27 +3,30 @@ package ua.rozhkov.springdepdb.FormDTO;
 import ua.rozhkov.springdepdb.DAO.entity.OwnerShip;
 import ua.rozhkov.springdepdb.DAO.entity.Specialty;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class CollegeFormDTO {
+    private Long id;
     private String name;
     private String address;
     private String director;
     private String phone;
-    private OwnerShip ownerShip;
-    private String[] selectedSpecialties;
-    private List<Specialty> specialties;
+    private String selectedOwnerShip;       //selected ownership
+    private List<OwnerShip> ownerShips;     //all available ownerships
+    private String[] selectedSpecialties;   //selected specialty
+    private List<Specialty> specialties;    //all available specialties
 
     public CollegeFormDTO() {
-
+        ownerShips = Arrays.asList(OwnerShip.values());
     }
 
-    public CollegeFormDTO(String name, String address, String director, String phone, OwnerShip ownerShip) {
-        this.name = name;
-        this.address = address;
-        this.director = director;
-        this.phone = phone;
-        this.ownerShip = ownerShip;
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -58,12 +61,20 @@ public class CollegeFormDTO {
         this.phone = phone;
     }
 
-    public OwnerShip getOwnerShip() {
-        return ownerShip;
+    public String getSelectedOwnerShip() {
+        return selectedOwnerShip;
     }
 
-    public void setOwnerShip(OwnerShip ownerShip) {
-        this.ownerShip = ownerShip;
+    public void setSelectedOwnerShip(String selectedOwnerShip) {
+        this.selectedOwnerShip = selectedOwnerShip;
+    }
+
+    public List<OwnerShip> getOwnerShips() {
+        return ownerShips;
+    }
+
+    public void setOwnerShips(List<OwnerShip> ownerShips) {
+        this.ownerShips = ownerShips;
     }
 
     public String[] getSelectedSpecialties() {

@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ua.rozhkov.springdepdb.DAO.entity.Period;
 import ua.rozhkov.springdepdb.FormDTO.PeriodFormDTO;
-import ua.rozhkov.springdepdb.service.CollegeService;
 import ua.rozhkov.springdepdb.service.PeriodService;
 
 @Controller
@@ -16,8 +15,6 @@ import ua.rozhkov.springdepdb.service.PeriodService;
 public class PeriodController {
     @Autowired
     private PeriodService periodService;
-    @Autowired
-    private CollegeService collegeService;
 
     @RequestMapping("/list")
     public String showListPeriodsPage(Model model) {
@@ -34,8 +31,6 @@ public class PeriodController {
     @RequestMapping("/addPeriod")
     public String addPeriod(@ModelAttribute PeriodFormDTO periodFormDTOToAdd) {
         periodService.perfomPeriodFormDTOAdd(periodFormDTOToAdd);
-//        periodService.addColleges(checkedColleges, newPeriod);
-//        periodService.save(newPeriod);
         return "redirect:/period/list";
     }
 

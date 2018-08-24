@@ -15,7 +15,7 @@
 <form id="newPeriod" action="#" th:action="@{/period/editPeriod}" th:object="${periodFormDTOToEdit}" method="post">
     <p>ID: <input type="text" th:field="*{id}" readonly></p>
     <p>Name: <input type="text" th:field="*{name}"/></p>
-    <p>Select colleges here:
+    <p>Select specilaties here:
     <ul>
         <li th:each="college: *{colleges}">
             <input type="checkbox"

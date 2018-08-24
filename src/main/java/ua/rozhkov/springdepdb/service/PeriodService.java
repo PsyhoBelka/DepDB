@@ -10,6 +10,7 @@ import ua.rozhkov.springdepdb.FormDTO.PeriodFormDTO;
 import java.util.ArrayList;
 import java.util.List;
 
+//todo add validation
 @Service
 public class PeriodService implements BaseService<Period, Long> {
     @Autowired
@@ -17,7 +18,6 @@ public class PeriodService implements BaseService<Period, Long> {
 
     @Autowired
     private CollegeService collegeService;
-
 
     @Override
     public Period findById(Long id) {
@@ -73,20 +73,20 @@ public class PeriodService implements BaseService<Period, Long> {
         return newPeriod;
     }
 
-    public PeriodFormDTO preparePeriodFormDTOToEdit(Period editPeriodToEdit) {
+    public PeriodFormDTO preparePeriodFormDTOToEdit(Period periodToEdit) {
         PeriodFormDTO periodFormDTOToEdit = new PeriodFormDTO();
-        periodFormDTOToEdit.setId(editPeriodToEdit.getId());
-        periodFormDTOToEdit.setName(editPeriodToEdit.getName());
+        periodFormDTOToEdit.setId(periodToEdit.getId());
+        periodFormDTOToEdit.setName(periodToEdit.getName());
         periodFormDTOToEdit.setColleges(collegeService.findAll());
-        periodFormDTOToEdit.setSelectedColleges(editPeriodToEdit.colegesIdsToStrindArray());
+        periodFormDTOToEdit.setSelectedColleges(periodToEdit.colegesIdsToStrindArray());
         return periodFormDTOToEdit;
     }
 
-    public Period perfomPeriodFormDTOEdit(PeriodFormDTO periodFormDTOToUpdate) {
+    public Period perfomPeriodFormDTOEdit(PeriodFormDTO periodFormDTOToEdit) {
         Period periodToUpdate = new Period();
-        periodToUpdate.setId(periodFormDTOToUpdate.getId());
-        periodToUpdate.setName(periodFormDTOToUpdate.getName());
-        periodToUpdate.setColleges(getCollegesByIdsArray(periodFormDTOToUpdate.getSelectedColleges(), periodFormDTOToUpdate));
+        periodToUpdate.setId(periodFormDTOToEdit.getId());
+        periodToUpdate.setName(periodFormDTOToEdit.getName());
+        periodToUpdate.setColleges(getCollegesByIdsArray(periodFormDTOToEdit.getSelectedColleges(), periodFormDTOToEdit));
         periodRepository.saveAndFlush(periodToUpdate);
         return periodToUpdate;
     }

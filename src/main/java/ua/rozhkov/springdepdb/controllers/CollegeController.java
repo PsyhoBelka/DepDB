@@ -1,34 +1,20 @@
 package ua.rozhkov.springdepdb.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import ua.rozhkov.springdepdb.DAO.entity.College;
-import ua.rozhkov.springdepdb.DAO.entity.OwnerShip;
-import ua.rozhkov.springdepdb.DAO.entity.Specialty;
+import ua.rozhkov.springdepdb.FormDTO.CollegeFormDTO;
 import ua.rozhkov.springdepdb.service.CollegeService;
-import ua.rozhkov.springdepdb.service.SpecialtyService;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 @Controller
 @RequestMapping("/college")
 public class CollegeController {
-
+    @Autowired
     private CollegeService collegeService;
-    private List<OwnerShip> collegeOwnerShips;
-    private SpecialtyService specialtyService;
-
-    public CollegeController(CollegeService collegeService, SpecialtyService specialtyService) {
-        this.collegeService = collegeService;
-        collegeOwnerShips = Arrays.asList(OwnerShip.values());
-        this.specialtyService = specialtyService;
-    }
 
     @RequestMapping("/list")
     public String showListCollegesPage(Model model) {
@@ -36,35 +22,21 @@ public class CollegeController {
         return "college/listColleges";
     }
 
-    //todo
     @RequestMapping("/add")
     public String showAddCollegePage(Model model) {
-        College newCollege = new College();
-        model.addAttribute("ownerShips", collegeOwnerShips);
-        model.addAttribute("newCollege", newCollege);
-        List<Specialty> specialties = specialtyService.findAll();
-        model.addAttribute("specialties", specialties);
+        model.addAttribute("collegeFormDTOToAdd", collegeService.prepareCollegeFormDTOToAdd());
         return "college/addCollege";
     }
 
-    //todo
     @RequestMapping("/addNewCollege")
-    public String addNewCollege(@ModelAttribute College newCollege,
-                                @RequestParam("checkedSpecialties") List<String> checkedSpecialities) {
-        List<Specialty> checkedSpecialtyList = new ArrayList<>();
-        for (String id :
-                checkedSpecialities) {
-            checkedSpecialtyList.add(specialtyService.findById(Long.parseLong(id)));
-        }
+    public String addNewCollege(@ModelAttribute CollegeFormDTO collegeFormDTOToAdd) {
+        collegeService.perfomCollegeFormDTOAdd(collegeFormDTOToAdd);
         return "redirect:/college/list";
     }
 
     //todo
     @RequestMapping("/edit/{id}")
     public String showEditPage(@PathVariable long id, Model model) {
-        model.addAttribute("ownerShips", collegeOwnerShips);
-        College collegeToUpdate = collegeService.findById(id);
-        model.addAttribute("collegeToUpdate", collegeToUpdate);
         return "college/editCollege";
     }
 
