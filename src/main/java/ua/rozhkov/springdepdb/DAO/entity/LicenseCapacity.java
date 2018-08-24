@@ -1,7 +1,6 @@
 package ua.rozhkov.springdepdb.DAO.entity;
 
 import org.hibernate.annotations.GenericGenerator;
-import ua.rozhkov.springdepdb.DAO.enums.StudyForm;
 
 import javax.persistence.*;
 
@@ -9,19 +8,13 @@ import javax.persistence.*;
 @Table(name = "licenses")
 public class LicenseCapacity {
     private Long id;
-    private StudyForm studyForm;
     private int capacity;
 
     public LicenseCapacity() {
     }
 
-    public LicenseCapacity(StudyForm studyForm, int capacity) {
-        this.studyForm = studyForm;
-        this.capacity = capacity;
-    }
-
     @Id
-    @Column(name = "license_id")
+    @Column(name = "id")
     @GeneratedValue(generator = "increment")
     @GenericGenerator(name = "increment", strategy = "increment")
     public Long getId() {
@@ -30,16 +23,6 @@ public class LicenseCapacity {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    @Column(name = "studyform")
-    @Enumerated(EnumType.STRING)
-    public StudyForm getStudyForm() {
-        return studyForm;
-    }
-
-    public void setStudyForm(StudyForm studyForm) {
-        this.studyForm = studyForm;
     }
 
     @Column(name = "capacity")
@@ -54,7 +37,6 @@ public class LicenseCapacity {
     @Override
     public String toString() {
         return "LicenseCapacity{" +
-                "studyForm=" + studyForm +
                 ", capacity=" + capacity +
                 '}';
     }

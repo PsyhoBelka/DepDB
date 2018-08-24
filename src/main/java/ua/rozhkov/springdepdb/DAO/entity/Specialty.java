@@ -3,6 +3,7 @@ package ua.rozhkov.springdepdb.DAO.entity;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -15,8 +16,7 @@ public class Specialty {
     private String name;
     private String code;
     private List<College> colleges=new LinkedList<>();
-    private List<LicenseCapacity> licenses = new LinkedList<>();
-    private List<RealCapacity> reals = new LinkedList<>();
+    private List<Level> levels = new ArrayList<>();
 
     public Specialty() {
     }
@@ -27,7 +27,7 @@ public class Specialty {
     }
 
     @Id
-    @Column(name = "specialty_id")
+    @Column(name = "id")
     @GeneratedValue(generator = "increment")
     @GenericGenerator(name = "increment", strategy = "increment")
     public Long getId() {
@@ -67,34 +67,6 @@ public class Specialty {
 
     public void setColleges(List<College> colleges) {
         this.colleges = colleges;
-    }
-
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "specialty_id")
-    public List<LicenseCapacity> getLicenses() {
-        return licenses;
-    }
-
-    public void setLicenses(List<LicenseCapacity> licenses) {
-        this.licenses = licenses;
-    }
-
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "specialty_id")
-    public List<RealCapacity> getReals() {
-        return reals;
-    }
-
-    public void setReals(List<RealCapacity> reals) {
-        this.reals = reals;
-    }
-
-    public void addLicenseCapacity(LicenseCapacity licenseCapacity) {
-        this.getLicenses().add(licenseCapacity);
-    }
-
-    public void addReals(RealCapacity realCapacity) {
-        this.getReals().add(realCapacity);
     }
 
     @Override

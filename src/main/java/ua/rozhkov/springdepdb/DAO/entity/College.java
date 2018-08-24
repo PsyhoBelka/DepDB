@@ -32,7 +32,7 @@ public class College {
     }
 
     @Id
-    @Column(name = "college_id")
+    @Column(name = "id")
     @GeneratedValue(generator = "increment")
     @GenericGenerator(name = "increment", strategy = "increment")
     public Long getId() {
