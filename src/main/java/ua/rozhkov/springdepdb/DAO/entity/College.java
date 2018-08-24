@@ -116,4 +116,13 @@ public class College {
                 ']';
     }
 
+    public String[] specialitiesIdsToStringArray() {
+        String[] ids = new String[specialties.size()];
+        int i = 0;
+        for (Specialty specialty :
+                specialties) {
+            ids[i++] = String.valueOf(specialty.getId());
+        }
+        return ids;
+    }
 }

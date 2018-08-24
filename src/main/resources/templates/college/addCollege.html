@@ -15,35 +15,15 @@
     <p>Director: <input type="text" th:field="*{director}"/></p>
     <p>Phone: <input type="text" th:field="*{phone}"/></p>
     <p>Select ownership here:
-        <!--<select form="newCollege" th:field="*{ownerShip}" id="ownerShip">
-            <option disabled value="0">Choose ownership here:</option>
-            <option th:each="ownerShip : ${ownerShips}"
-                    th:value="${ownerShip.toString()}"
-                    th:utext="${ownerShip.getString()}"></option>
-        </select>-->
         <select th:field="*{selectedOwnerShip}">
             <option
                     th:each="ownerShip: *{ownerShips}"
                     th:value="${ownerShip.toString()}"
                     th:text="${ownerShip.getString()}"></option>
         </select>
-        <!--
-        <select th:field="*{dropdownSelectedValue}">
-          <option
-              th:each="dropdownValue: ${singleSelectAllValues}"
-              th:value="${dropdownValue}"
-              th:text="${dropdownValue}" ></option>
-        </select>
-                -->
     </p>
     <p>Select specialties here:
     <ul style="margin-left: 0; padding-left: 0;">
-        <!--<li th:each="specialty,counter : ${specialties}" style="list-style-type: none;">
-            <input type="checkbox" name="checkedSpecialties"
-                   th:id="${counter.count}"
-                   th:utext="${specialty.name}"
-                   th:value="${specialty.id}"/>
-        </li>-->
         <li th:each="specialty: *{specialties}">
             <input type="checkbox"
                    th:field="*{selectedSpecialties}"

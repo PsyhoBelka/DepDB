@@ -65,29 +65,33 @@ public class PeriodService implements BaseService<Period, Long> {
         return periodFormDTO;
     }
 
-    public Period perfomPeriodFormDTOAdd(PeriodFormDTO newPeriodFormDTO) {
+    public Period perfomPeriodFormDTOAdd(PeriodFormDTO periodFormDTOToAdd) {
         Period newPeriod=new Period();
-        newPeriod.setName(newPeriodFormDTO.getName());
-        newPeriod.setColleges(getCollegesByIdsArray(newPeriodFormDTO.getSelectedColleges(), newPeriodFormDTO));
+        newPeriod.setName(periodFormDTOToAdd.getName());
+        newPeriod.setColleges(getCollegesByIdsArray(periodFormDTOToAdd.getSelectedColleges(), periodFormDTOToAdd));
         periodRepository.saveAndFlush(newPeriod);
         return newPeriod;
     }
 
     public PeriodFormDTO preparePeriodFormDTOToEdit(Period periodToEdit) {
         PeriodFormDTO periodFormDTOToEdit = new PeriodFormDTO();
+
         periodFormDTOToEdit.setId(periodToEdit.getId());
         periodFormDTOToEdit.setName(periodToEdit.getName());
+
         periodFormDTOToEdit.setColleges(collegeService.findAll());
         periodFormDTOToEdit.setSelectedColleges(periodToEdit.colegesIdsToStrindArray());
         return periodFormDTOToEdit;
     }
 
     public Period perfomPeriodFormDTOEdit(PeriodFormDTO periodFormDTOToEdit) {
-        Period periodToUpdate = new Period();
-        periodToUpdate.setId(periodFormDTOToEdit.getId());
-        periodToUpdate.setName(periodFormDTOToEdit.getName());
-        periodToUpdate.setColleges(getCollegesByIdsArray(periodFormDTOToEdit.getSelectedColleges(), periodFormDTOToEdit));
-        periodRepository.saveAndFlush(periodToUpdate);
-        return periodToUpdate;
+        Period periodToEdit = new Period();
+
+        periodToEdit.setId(periodFormDTOToEdit.getId());
+        periodToEdit.setName(periodFormDTOToEdit.getName());
+
+        periodToEdit.setColleges(getCollegesByIdsArray(periodFormDTOToEdit.getSelectedColleges(), periodFormDTOToEdit));
+        periodRepository.saveAndFlush(periodToEdit);
+        return periodToEdit;
     }
 }

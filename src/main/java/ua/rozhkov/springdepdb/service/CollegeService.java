@@ -58,15 +58,47 @@ public class CollegeService implements BaseService<College, Long> {
         return collegeFormDTOToAdd;
     }
 
-    public College perfomCollegeFormDTOAdd(CollegeFormDTO newCollegeFormDTO) {
+    public College perfomCollegeFormDTOAdd(CollegeFormDTO collegeFormDTOToAdd) {
         College newCollege = new College();
-        newCollege.setName(newCollegeFormDTO.getName());
-        newCollege.setAddress(newCollegeFormDTO.getAddress());
-        newCollege.setDirector(newCollegeFormDTO.getDirector());
-        newCollege.setPhone(newCollegeFormDTO.getPhone());
-        newCollege.setOwnerShip(OwnerShip.valueOf(newCollegeFormDTO.getSelectedOwnerShip()));
-        newCollege.setSpecialties(getSpecialtiesByIdsArray(newCollegeFormDTO.getSelectedSpecialties(), newCollegeFormDTO));
+
+        newCollege.setName(collegeFormDTOToAdd.getName());
+        newCollege.setAddress(collegeFormDTOToAdd.getAddress());
+        newCollege.setDirector(collegeFormDTOToAdd.getDirector());
+        newCollege.setPhone(collegeFormDTOToAdd.getPhone());
+        newCollege.setOwnerShip(OwnerShip.valueOf(collegeFormDTOToAdd.getSelectedOwnerShip()));
+        newCollege.setSpecialties(getSpecialtiesByIdsArray(collegeFormDTOToAdd.getSelectedSpecialties(), collegeFormDTOToAdd));
+
         collegeRepository.saveAndFlush(newCollege);
         return newCollege;
+    }
+
+    public CollegeFormDTO prepareCollegeFormDTOToEdit(College collegeToEdit) {
+        CollegeFormDTO collegeFormDTOToEdit = new CollegeFormDTO();
+
+        collegeFormDTOToEdit.setId(collegeToEdit.getId());
+        collegeFormDTOToEdit.setName(collegeToEdit.getName());
+        collegeFormDTOToEdit.setAddress(collegeToEdit.getAddress());
+        collegeFormDTOToEdit.setDirector(collegeToEdit.getDirector());
+        collegeFormDTOToEdit.setPhone(collegeToEdit.getPhone());
+        collegeFormDTOToEdit.setSelectedOwnerShip(collegeToEdit.getOwnerShip().toString());
+
+        collegeFormDTOToEdit.setSpecialties(specialtyService.findAll());
+        collegeFormDTOToEdit.setSelectedSpecialties(collegeToEdit.specialitiesIdsToStringArray());
+        return collegeFormDTOToEdit;
+    }
+
+    public College perfomCollegeFormDTOEdit(CollegeFormDTO collegeFormDTOToEdit) {
+        College collegeToEdit = new College();
+
+        collegeToEdit.setId(collegeFormDTOToEdit.getId());
+        collegeToEdit.setName(collegeFormDTOToEdit.getName());
+        collegeToEdit.setAddress(collegeFormDTOToEdit.getAddress());
+        collegeToEdit.setDirector(collegeFormDTOToEdit.getDirector());
+        collegeToEdit.setPhone(collegeFormDTOToEdit.getPhone());
+        collegeToEdit.setOwnerShip(OwnerShip.valueOf(collegeFormDTOToEdit.getSelectedOwnerShip()));
+        collegeToEdit.setSpecialties(getSpecialtiesByIdsArray(collegeFormDTOToEdit.getSelectedSpecialties(), collegeFormDTOToEdit));
+
+        collegeRepository.saveAndFlush(collegeToEdit);
+        return collegeToEdit;
     }
 }

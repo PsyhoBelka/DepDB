@@ -36,8 +36,8 @@ public class PeriodController {
 
     @RequestMapping("/edit/{id}")
     public String showEditPage(@PathVariable long id, Model model) {
-        Period periodToUpdate = periodService.findById(id);
-        model.addAttribute("periodFormDTOToEdit", periodService.preparePeriodFormDTOToEdit(periodToUpdate));
+        Period periodToEdit = periodService.findById(id);
+        model.addAttribute("periodFormDTOToEdit", periodService.preparePeriodFormDTOToEdit(periodToEdit));
         return "period/editPeriod";
     }
 
