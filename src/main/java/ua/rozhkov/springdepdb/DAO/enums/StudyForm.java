@@ -1,4 +1,4 @@
-package ua.rozhkov.springdepdb.DAO.entity;
+package ua.rozhkov.springdepdb.DAO.enums;
 
 public enum StudyForm {
     DAYTIME("ЗАОЧНА"),

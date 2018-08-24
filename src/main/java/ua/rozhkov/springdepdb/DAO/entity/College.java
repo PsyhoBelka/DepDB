@@ -1,6 +1,7 @@
 package ua.rozhkov.springdepdb.DAO.entity;
 
 import org.hibernate.annotations.GenericGenerator;
+import ua.rozhkov.springdepdb.DAO.enums.OwnerShip;
 
 import javax.persistence.*;
 import java.util.LinkedList;

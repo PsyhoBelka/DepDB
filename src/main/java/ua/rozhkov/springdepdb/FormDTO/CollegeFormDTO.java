@@ -1,7 +1,7 @@
 package ua.rozhkov.springdepdb.FormDTO;
 
-import ua.rozhkov.springdepdb.DAO.entity.OwnerShip;
 import ua.rozhkov.springdepdb.DAO.entity.Specialty;
+import ua.rozhkov.springdepdb.DAO.enums.OwnerShip;
 
 import java.util.Arrays;
 import java.util.List;

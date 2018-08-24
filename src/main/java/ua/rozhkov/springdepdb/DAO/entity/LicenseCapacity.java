@@ -1,6 +1,7 @@
 package ua.rozhkov.springdepdb.DAO.entity;
 
 import org.hibernate.annotations.GenericGenerator;
+import ua.rozhkov.springdepdb.DAO.enums.StudyForm;
 
 import javax.persistence.*;
 

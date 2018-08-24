@@ -1,4 +1,4 @@
-package ua.rozhkov.springdepdb.DAO.entity;
+package ua.rozhkov.springdepdb.DAO.enums;
 
 public enum Base {
     NINE_CLASS("9 клас"),

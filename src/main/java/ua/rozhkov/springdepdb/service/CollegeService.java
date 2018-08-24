@@ -3,8 +3,8 @@ package ua.rozhkov.springdepdb.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ua.rozhkov.springdepdb.DAO.entity.College;
-import ua.rozhkov.springdepdb.DAO.entity.OwnerShip;
 import ua.rozhkov.springdepdb.DAO.entity.Specialty;
+import ua.rozhkov.springdepdb.DAO.enums.OwnerShip;
 import ua.rozhkov.springdepdb.DAO.repository.CollegeRepository;
 import ua.rozhkov.springdepdb.FormDTO.CollegeFormDTO;
 
