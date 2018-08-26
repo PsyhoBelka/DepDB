@@ -4,10 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import ua.rozhkov.springdepdb.DAO.entity.College;
-import ua.rozhkov.springdepdb.DAO.entity.Specialty;
-import ua.rozhkov.springdepdb.DAO.enums.OwnerShip;
 import ua.rozhkov.springdepdb.service.CollegeService;
+import ua.rozhkov.springdepdb.service.PeriodService;
 import ua.rozhkov.springdepdb.service.SpecialtyService;
 
 @SpringBootApplication
@@ -16,6 +14,8 @@ public class SpringdepdbApplication implements CommandLineRunner {
     private SpecialtyService specialtyService;
     @Autowired
     private CollegeService collegeService;
+    @Autowired
+    private PeriodService periodService;
 
     public static void main(String[] args) {
         SpringApplication.run(SpringdepdbApplication.class, args);
@@ -23,12 +23,15 @@ public class SpringdepdbApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        specialtyService.save(new Specialty("111", "111"));
+       /* specialtyService.save(new Specialty("111", "111"));
         specialtyService.save(new Specialty("222", "222"));
 
         collegeService.save(new College("111","111","111","111", OwnerShip.COMMUN));
         collegeService.save(new College("222","222","222","222", OwnerShip.COMMUN));
         collegeService.save(new College("333","333","333","333", OwnerShip.GOVEM));
+
+        periodService.save(new Period("111-111"));
+        periodService.save(new Period("222-222"));*/
     }
 
     /* @Bean

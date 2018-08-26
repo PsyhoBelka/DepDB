@@ -1,0 +1,32 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Specialty details</title>
+</head>
+<body style="background-color: palegoldenrod;">
+<h2 align="center">
+    Select college to view:
+</h2>
+<div>
+    <table style="margin-left: auto; margin-right: auto;" border="1">
+        <tbody>
+        <tr>
+            <th style="width: 400px; text-align: center;">Name</th>
+            <th style="width: 200px; text-align: center;">Director</th>
+            <th style="width: 100px; text-align: center;">Action</th>
+        </tr>
+        <tr th:each="college:${colleges}">
+            <td th:utext="${college.name}">Name</td>
+            <td th:utext="${college.director}">Director</td>
+            <td style="width: 50px; text-align: center;">
+                <a th:href="@{/detail/college/__${college.id}__}" href="listColleges.html">Goto</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<p align="center"><a href="/"> Back to home</a></p>
+<p align="center"><a href="/detail"> Back to period selection</a></p>
+</body>
+</html>

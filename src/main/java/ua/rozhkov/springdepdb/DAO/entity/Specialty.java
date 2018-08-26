@@ -15,8 +15,8 @@ public class Specialty {
     private Long id;
     private String name;
     private String code;
-    private List<College> colleges=new LinkedList<>();
-    private List<Level> levels = new ArrayList<>();
+    private List<College> colleges = new LinkedList<>();
+    private List<SpecialtyDetail> specialtyDetails = new ArrayList<>();
 
     public Specialty() {
     }
@@ -56,17 +56,33 @@ public class Specialty {
         this.code = code;
     }
 
-    @ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,
-            CascadeType.PERSIST,CascadeType.REFRESH})
+    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE,
+            CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(name = "colleges_specialties",
-    joinColumns = @JoinColumn(name = "specialty_id"),
-    inverseJoinColumns = @JoinColumn(name = "college_id"))
+            joinColumns = @JoinColumn(name = "specialty_id"),
+            inverseJoinColumns = @JoinColumn(name = "college_id"))
     public List<College> getColleges() {
         return colleges;
     }
 
     public void setColleges(List<College> colleges) {
         this.colleges = colleges;
+    }
+
+    @OneToMany(fetch = FetchType.LAZY,
+            cascade = {CascadeType.DETACH, CascadeType.MERGE,
+                    CascadeType.PERSIST, CascadeType.REFRESH})
+    @JoinColumn(name = "specialty_id")
+    public List<SpecialtyDetail> getSpecialtyDetails() {
+        return specialtyDetails;
+    }
+
+    public void setSpecialtyDetails(List<SpecialtyDetail> specialtyDetails) {
+        this.specialtyDetails = specialtyDetails;
+    }
+
+    public void addSpecialtyDetail(SpecialtyDetail specialtyDetail) {
+        specialtyDetails.add(specialtyDetail);
     }
 
     @Override

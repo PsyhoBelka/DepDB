@@ -34,7 +34,6 @@ public class CollegeController {
         return "redirect:/college/list";
     }
 
-    //todo
     @RequestMapping("/edit/{id}")
     public String showEditPage(@PathVariable long id, Model model) {
         College collegeToEdit = collegeService.findById(id);
@@ -42,7 +41,6 @@ public class CollegeController {
         return "college/editCollege";
     }
 
-    //todo
     @RequestMapping("/editCollege")
     public String editCollege(@ModelAttribute CollegeFormDTO collegeFormDTOToEdit) {
         collegeService.perfomCollegeFormDTOEdit(collegeFormDTOToEdit);

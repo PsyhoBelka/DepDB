@@ -8,7 +8,7 @@
     Edit specialty info
 </h2>
 <p align="center"><a href="/">(Back to home)</a></p>
-<form id="updateSpeciality" action="#" th:action="@{/specialty/updateSpecialty}" th:object="${specialtyToUpdate}"
+<form id="updateSpeciality" action="#" th:action="@{/specialty/editSpecialty}" th:object="${specialtyToUpdate}"
       method="post">
     <p>ID: <input type="text" th:field="*{id}" readonly></p>
     <p>Code: <input type="text" th:field="*{code}"/></p>

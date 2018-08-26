@@ -8,7 +8,7 @@
     Adding new college
 </h2>
 <p align="center"><a href="/">(Back to home)</a></p>
-<form id="newSpecialty" action="#" th:action="@{/specialty/addNewSpecialty}" th:object="${newSpecialty}"
+<form id="newSpecialty" action="#" th:action="@{/specialty/addSpecialty}" th:object="${newSpecialty}"
       method="post">
     <p>Code: <input type="text" th:field="*{code}"/></p>
     <p>Name: <input type="text" th:field="*{name}"/></p>

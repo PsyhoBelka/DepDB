@@ -1,0 +1,98 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Specialty details</title>
+</head>
+<body style="background-color: palegoldenrod;">
+<h2 align="center">
+    Specialty details
+</h2>
+<h3 align="center">
+    Specialty name: <span th:text="${specialtyWithDetails.name}"/> <br>
+    (<a th:href="@{'/detail/college/'+${session.collegeId}}" href="123">goBack</a>)
+</h3>
+<h4></h4>
+<table style="margin-left: auto; margin-right: auto;" border="1">
+    <tbody>
+    <tr>
+        <td style="width: 180px; text-align: center;">Base</td>
+        <td style="width: 80px; text-align: center;">StudyForm</td>
+        <td style="width: 120px; text-align: center;">LicenseCapacity</td>
+        <td style="width: 100px; text-align: center;">RegionOrder</td>
+        <td style="width: 100px; text-align: center;">RealCapacity</td>
+        <td style="width: 70px; text-align: center;">Graduated</td>
+        <td style="width: 100px; text-align: center;" colspan="2">Actions</td>
+    </tr>
+    <tr th:each="specialtyDetail:${specialtyDetails}">
+        <td th:text="${specialtyDetail.base.getString()}" style="text-align: center;"></td>
+        <td th:text="${specialtyDetail.studyForm.getString()}" style="text-align: center;"></td>
+        <td th:text="${specialtyDetail.licenseCapacity}" style="text-align: center;"></td>
+        <td th:text="${specialtyDetail.regionOrder}" style="text-align: center;"></td>
+        <td th:text="${specialtyDetail.realCapacity}" style="text-align: center;"></td>
+        <td th:text="${specialtyDetail.graduated}" style="text-align: center;"></td>
+        <td style="width: 50px; text-align: center;">
+            <a th:href="@{detail/editSpecialtyDetail/__${specialtyDetail.id}__}">edit</a></td>
+        <td style="width: 50px; text-align: center;">
+            <a th:href="@{detail/deleteSpecialtyDetail}">delete</a></td>
+    </tr>
+    <tr>
+        <td colspan="8" style="text-align: right">
+            <a th:href="@{/detail/addSpecialtyDetail/__${specialtyWithDetails.id}__}" href="addSpecialtyDetail.html">+Add
+                details+</a>
+        </td>
+    </tr>
+
+    </tbody>
+</table>
+
+
+<!--
+&ndash;&gt;
+-->
+
+<!-- <p>Name: <input type="text" th:field="*{name}"/></p>
+    <p>Address: <input type="text" th:field="*{address}"/></p>
+    <p>Director: <input type="text" th:field="*{director}"/></p>
+    <p>Phone: <input type="text" th:field="*{phone}"/></p>-->
+
+
+<!-- <p>Select base here:
+     <select th:field="*{selectedOwnerShip}">
+         <option
+                 th:each="ownerShip: *{ownerShips}"
+                 th:value="${ownerShip.toString()}"
+                 th:text="${ownerShip.getString()}"></option>
+     </select>
+ </p>-->
+
+<!--<table style="margin-left: auto; margin-right: auto;" border="1" th:object="speciltyDetails">
+    <tbody>
+    <tr>
+        <th style="width: 100px; text-align: center;" hidden>Id</th>
+        <th style="width: 400px; text-align: center;">Base</th>
+        <th style="width: 400px; text-align: center;">StudyFrom</th>
+        <th style="width: 400px; text-align: center;">LicenseCapacity</th>
+        <th style="width: 400px; text-align: center;">RealCapacity</th>
+        <th style="width: 100px; text-align: center;" colspan="2">Actions</th>
+    </tr>
+    <tr th:each="detail:*{specialtyDetails}">
+        <td th:utext="*{detail.id}" style="text-align: center;">1</td>
+        <td th:utext="*{detail.base.toString()}">Base</td>
+        <td th:utext="*{detail.studyFrom.toString()}">StudyFrom</td>
+        <td th:utext="*{detail.licenseCapacity}">LicenseCapacity</td>
+        <td th:utext="*{detail.realCapacity}">RealCapacity</td>
+        <td style="width: 50px; text-align: center;"><a th:href="@{/specialty/edit/__${specialty.id}__}"
+                                                        href="../specialty/listSpecialty.html">edit</a></td>
+        <td style="width: 50px; text-align: center;"><a th:href="@{/specialty/delete/__${specialty.id}__}"
+                                                        href="../specialty/listSpecialty.html">delete</a></td>
+    </tr>
+    <tr>
+        <td style="text-align: right;" colspan="8"><a href="/specialty/detail/add">+Add new specialty detail+</a></td>
+    </tr>
+    </tbody>
+</table>
+</div>-->
+<p align="center"><a href="/"> Back to home</a></p>
+</body>
+</html>

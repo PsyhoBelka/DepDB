@@ -14,10 +14,10 @@
             <th style="width: 100px; text-align: center;" hidden>Id</th>
             <th style="width: 400px; text-align: center;">Code</th>
             <th style="width: 400px; text-align: center;">Name</th>
-            <th style="width: 100px; text-align: center;" colspan="2">Actions&nbsp;</th>
+            <th style="width: 100px; text-align: center;" colspan="2">Actions</th>
         </tr>
         <tr th:each="specialty:${specialties}">
-            <td th:utext="${specialty.id}" style="text-align: center;">1</td>
+            <td th:utext="${specialty.id}" style="text-align: center;" hidden>1</td>
             <td th:utext="${specialty.code}">Code</td>
             <td th:utext="${specialty.name}">Name</td>
             <td style="width: 50px; text-align: center;"><a th:href="@{/specialty/edit/__${specialty.id}__}"

@@ -40,7 +40,9 @@ public class Period {
         this.name = name;
     }
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY,
+            cascade = {CascadeType.DETACH, CascadeType.MERGE,
+                    CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "period_id")
     public List<College> getColleges() {
         return colleges;

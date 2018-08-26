@@ -3,7 +3,7 @@ package ua.rozhkov.springdepdb.DAO.enums;
 public enum Base {
     NINE_CLASS("9 клас"),
     ELEV_CLASS("11 клас"),
-    KVAL_ORB("кваліфікований робітник");
+    KVAL_ROB("кваліфікований робітник");
 
     private String string;
 

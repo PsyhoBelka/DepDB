@@ -9,7 +9,7 @@ import ua.rozhkov.springdepdb.DAO.entity.Specialty;
 import ua.rozhkov.springdepdb.service.SpecialtyService;
 
 @Controller
-@RequestMapping("/specialty")
+@RequestMapping("/specialty")//todo validation
 public class SpecialtyController {
 
     private SpecialtyService specialtyService;
@@ -20,35 +20,31 @@ public class SpecialtyController {
 
     @RequestMapping("/list")
     public String showListSpecialitiesPage(Model model) {
-        model.addAttribute("specialities", specialtyService.findAll());
+        model.addAttribute("specialties", specialtyService.findAll());
         return "specialty/listSpecialty";
     }
 
-    //todo
     @RequestMapping("/add")
     public String showAddSpecialtyPage(Model model) {
         Specialty newSpecialty = new Specialty();
         model.addAttribute("newSpecialty", newSpecialty);
-        return "addSpecialty";
+        return "specialty/addSpecialty";
     }
 
-    //todo
-    @RequestMapping("/addNewSpecialty")
+    @RequestMapping("/addSpecialty")
     public String addNewSpecialty(@ModelAttribute Specialty newSpecialty) {
         specialtyService.save(newSpecialty);
         return "redirect:/specialty/list";
     }
 
-    //todo
     @RequestMapping("/edit/{id}")
     public String showEditPage(@PathVariable long id, Model model) {
         Specialty specialtyToUpdate = specialtyService.findById(id);
         model.addAttribute("specialtyToUpdate", specialtyToUpdate);
-        return "editSpecialty";
+        return "specialty/editSpecialty";
     }
 
-    //todo
-    @RequestMapping("/updateSpecialty")
+    @RequestMapping("/editSpecialty")
     public String updateSpecialty(@ModelAttribute Specialty specialtyToUpdate) {
         specialtyService.save(specialtyToUpdate);
         return "redirect:/specialty/list";
