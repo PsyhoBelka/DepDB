@@ -4,11 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import ua.rozhkov.springdepdb.service.CollegeService;
 import ua.rozhkov.springdepdb.service.PeriodService;
 import ua.rozhkov.springdepdb.service.SpecialtyService;
 
 @SpringBootApplication
+@EnableTransactionManagement
 public class SpringdepdbApplication implements CommandLineRunner {
     @Autowired
     private SpecialtyService specialtyService;

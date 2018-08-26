@@ -49,7 +49,9 @@
                        href="/">edit</a>
                 </td>
                 <td style="width: 50px; text-align: center;">
-                    <a th:href="@{/detail/deleteDetailsFromSpecialty/__${specialty.specialty.getId()}__}" href="/">delete</a>
+                    <a th:href="@{'/detail/deleteDetailsFromSpecialty/college/'
+                    +${session.collegeId}+'/specialty/'+${specialty.specialty.getId()}}" href="/">
+                        delete</a>
                 </td>
             </tr>
             <tr>

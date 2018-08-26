@@ -11,7 +11,9 @@ import ua.rozhkov.springdepdb.DAO.repository.SpecialtyDetailRepository;
 import ua.rozhkov.springdepdb.FormDTO.GeneralInfoDTO;
 import ua.rozhkov.springdepdb.FormDTO.SpecialtyDetailFormDTO;
 
+import javax.transaction.Transactional;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 @Service
@@ -100,5 +102,21 @@ public class SpecialtyDetailService implements BaseService<SpecialtyDetail, Long
         specialtyDetailToEdit.setGraduated(specialtyDetailFormDTOToEdit.getGraduated());
         specialtyDetailToEdit.setRegionOrder(specialtyDetailFormDTOToEdit.getLicenseCapacity());
         save(specialtyDetailToEdit);
+    }
+
+    @Transactional
+    public void deleteCollegeDetailWithSpecialty(Long collegeId, Long specialtyId) {
+        College college = collegeService.findById(collegeId);
+        Specialty specialty = specialtyService.findById(specialtyId);
+        List<SpecialtyDetail> specialtyDetails = specialty.getSpecialtyDetails();
+        for (Iterator<SpecialtyDetail> spDet = specialtyDetails.iterator(); spDet.hasNext(); ) {
+            SpecialtyDetail specialtyDetail = spDet.next();
+            deleteById(specialtyDetail.getId());
+        }
+        specialty.getSpecialtyDetails().clear();
+        college.getSpecialties().remove(specialty);
+        specialty.getColleges().remove(college);
+        specialtyService.save(specialty);
+        collegeService.save(college);
     }
 }

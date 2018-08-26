@@ -85,6 +85,10 @@ public class Specialty {
         specialtyDetails.add(specialtyDetail);
     }
 
+    public void deleteSpecialtyDetail(SpecialtyDetail specialtyDetail) {
+        specialtyDetails.remove(specialtyDetail);
+    }
+
     @Override
     public String toString() {
         return "Specialty[" +

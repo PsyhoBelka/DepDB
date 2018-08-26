@@ -96,5 +96,9 @@ public class SpecialtyDetailController {
 
     //todo deleteSpecialtyDetail
 
-    //todo deleteDetailsFromSpecialty
+    @RequestMapping("/deleteDetailsFromSpecialty/college/{collegeId}/specialty/{specialtyId}")
+    public String deleteCollegeDetailWithSpecialty(@PathVariable Long collegeId, @PathVariable Long specialtyId, HttpSession httpSession) {
+        specialtyDetailService.deleteCollegeDetailWithSpecialty(collegeId, specialtyId);
+        return "redirect:/detail/college/" + httpSession.getAttribute("collegeId");
+    }
 }
