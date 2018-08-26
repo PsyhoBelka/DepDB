@@ -9,7 +9,8 @@
     Specialities details
 </h2>
 <h3 align="center">
-    College name: <span th:text="*{selectedCollege.getName()}"/> <br>(<a href="javascript:history.back()">goBack</a>)
+    College name: <span th:text="*{selectedCollege.getName()}"/> <br>
+    (<a th:href="@{'/detail/period/'+${session.periodId}}" href="123">goBack</a>)
 </h3>
 <div>
     <table style="margin-left: auto; margin-right: auto;" border="1">
@@ -99,34 +100,6 @@
         </tr>
         </tbody>
     </table>
-
-
-    <!--<table style="margin-left: auto; margin-right: auto;" border="1" th:object="speciltyDetails">
-        <tbody>
-        <tr>
-            <th style="width: 100px; text-align: center;" hidden>Id</th>
-            <th style="width: 400px; text-align: center;">Base</th>
-            <th style="width: 400px; text-align: center;">StudyFrom</th>
-            <th style="width: 400px; text-align: center;">LicenseCapacity</th>
-            <th style="width: 400px; text-align: center;">RealCapacity</th>
-            <th style="width: 100px; text-align: center;" colspan="2">Actions</th>
-        </tr>
-        <tr th:each="detail:*{specialtyDetails}">
-            <td th:utext="*{detail.id}" style="text-align: center;" hidden>1</td>
-            <td th:utext="*{detail.base.toString()}">Base</td>
-            <td th:utext="*{detail.studyForm.toString()}">StudyFrom</td>
-            <td th:utext="*{detail.licenseCapacity}">LicenseCapacity</td>
-            <td th:utext="*{detail.realCapacity}">RealCapacity</td>
-            <td style="width: 50px; text-align: center;"><a th:href="@{/specialty/edit/__${detail.id}__}"
-                                                            href="../specialty/listSpecialty.html">edit</a></td>
-            <td style="width: 50px; text-align: center;"><a th:href="@{/specialty/delete/__${detail.id}__}"
-                                                            href="../specialty/listSpecialty.html">delete</a></td>
-        </tr>
-        <tr>
-            <td style="text-align: right;" colspan="8"><a href="/specialty/detail/add">+Add new specialty detail+</a></td>
-        </tr>
-        </tbody>
-    </table>-->
 </div>
 <p align="center"><a href="/"> Back to home</a></p>
 </body>

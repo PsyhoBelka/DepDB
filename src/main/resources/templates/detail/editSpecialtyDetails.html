@@ -2,13 +2,13 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Specialty details</title>
+    <title>Edit specialty details</title>
 </head>
-<body style="background-color: palegoldenrod;">
+<body>
 <h2 align="center">
     Specialities details
 </h2>
-<form id="newSpecialtyDetail" th:object="${specialtyDetailFormDTOToAdd}" action="/detail/specialtyDetailAdd"
+<form id="editSpecialtyDetail" th:object="${specialtyDetailFormDTOToEdit}" action="/detail/specialtyDetailEdit"
       method="post">
     <div>
         <p>Select base here:

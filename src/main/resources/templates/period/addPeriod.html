@@ -25,32 +25,3 @@
 </form>
 </body>
 </html>
-
-<!--<ul style="margin-left: 0; padding-left: 0;">
-        <li th:each="college,counter: *{colleges}">
-            <input type="checkbox" name="selColleges"
-                   th:checked="${#strings.contains(name, college.id)}?'checked'"
-                   th:id="${counter.count}"
-                   th:value="${college.id}"
-                   th:text="${college.name}"/>
-
-        </li>
-    </ul>
-
-<ul>
-  <li th:each="checkboxValue: ${multiCheckboxAllValues}">
-    <input type="checkbox"
-        th:field="*{multiCheckboxSelectedValues}"
-        th:value="${checkboxValue}" />
-    <label
-        th:for="${#ids.prev('multiCheckboxSelectedValues')}"
-        th:text="${checkboxValue}"></label>
-  </li>
-</ul>
-
-<li th:each="college,counter : *{colleges}" style="list-style-type: none;">
-    <input type="checkbox" name="checkedColleges"
-           th:id="${counter.count}"
-           th:utext="${college.name}"
-           th:value="${college.id}"/>
-</li>-->

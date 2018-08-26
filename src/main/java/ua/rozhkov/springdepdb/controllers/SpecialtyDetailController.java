@@ -43,6 +43,7 @@ public class SpecialtyDetailController {
     public String showCollegeSelectionPage(@PathVariable Long id, Model model, HttpSession httpSession) {
         Period selectedPeriod = periodService.findById(id);
         httpSession.setAttribute("periodId", selectedPeriod.getId());
+        model.addAttribute("periodName", selectedPeriod.getName());
         model.addAttribute("colleges", selectedPeriod.getColleges());
         return "detail/selectCollegeDetail";
     }
@@ -50,30 +51,21 @@ public class SpecialtyDetailController {
     @RequestMapping("/college/{id}")
     public String showGeneralDetailsPage(@PathVariable Long id, Model model, HttpSession httpSession) {
         College selectedCollege = collegeService.findById(id);
-        model.addAttribute("selectedCollege", selectedCollege);
-        /*List<Specialty> specialtyInCollege=selectedCollege.getSpecialties();
-        for (Specialty specialty :
-                specialtyInCollege) {
-            specialty.getSpecialtyDetails();
-        }*/
-
-//        model.addAttribute("specialties",selectedCollege.getSpecialties());
         httpSession.setAttribute("collegeId", selectedCollege.getId());
+        model.addAttribute("selectedCollege", selectedCollege);
         model.addAttribute("generalInfoDTO", specialtyDetailService.prepareGeneralInfoDTOToList(id));
         return "detail/listGeneralDetails";
     }
 
     @RequestMapping("/editDetailsFromSpecialty/{id}")
-    public String showListSpecialtyDetailsFromSpeciality(@PathVariable Long id, Model model) {
+    public String showListSpecialtyDetailsFromSpeciality(@PathVariable Long id, Model model, HttpSession httpSession) {
         Specialty specialty = specialtyService.findById(id);
-        specialty.setId(id);
+        httpSession.setAttribute("specialtyId", specialty.getId());
         model.addAttribute("specialtyDetails", specialty.getSpecialtyDetails());
-//        model.addAttribute("specialtyId",specialty.getId());
         model.addAttribute("specialtyWithDetails", specialty);
         return "detail/listDetailsFromSpecialty";
     }
 
-    //todo
     @RequestMapping("/addSpecialtyDetail/{id}")//id - id specialty
     public String showAddSpecialtyDetailPage(@PathVariable Long id, Model model) {
         model.addAttribute("specialtyDetailFormDTOToAdd", specialtyDetailService.prepareSpecialtyDetailFormDTOToAdd(id));
@@ -82,12 +74,25 @@ public class SpecialtyDetailController {
 
     //todo org.h2.jdbc.JdbcSQLException при добавлении не уникальной пары
     @RequestMapping("/specialtyDetailAdd")
-    public String addSpecialtyDetail(@ModelAttribute SpecialtyDetailFormDTO specialtyDetailFormDTOToAdd) {
-        specialtyDetailService.perfomSpecialtyDetailFormDTOToAdd(specialtyDetailFormDTOToAdd);
-        return "redirect:/detail/editDetailsFromSpecialty/" + specialtyDetailFormDTOToAdd.getSpecialtyId();
+    public String addSpecialtyDetail(@ModelAttribute SpecialtyDetailFormDTO specialtyDetailFormDTOToAdd,
+                                     HttpSession httpSession) {
+        specialtyDetailService.perfomSpecialtyDetailFormDTOAdd(specialtyDetailFormDTOToAdd);
+        return "redirect:/detail/editDetailsFromSpecialty/" + httpSession.getAttribute("specialtyId");
     }
 
     //todo editSpecialtyDetail/{id}
+    @RequestMapping("/editSpecialtyDetail/{id}")//id - specialtyDetail id
+    public String showEditSpecialtyDetailsPage(@PathVariable Long id, Model model) {
+        model.addAttribute("specialtyDetailFormDTOToEdit", specialtyDetailService.prepareSpecialtyDetailFormDTOToEdit(id));
+        return "detail/editSpecialtyDetails";
+    }
+
+    @RequestMapping("/specialtyDetailEdit")
+    public String editSpecialtyDetails(@ModelAttribute SpecialtyDetailFormDTO specialtyDetailFormDTOToEdit,
+                                       HttpSession httpSession) {
+        specialtyDetailService.perfomSpecialtyDetailFormDTOEdit(specialtyDetailFormDTOToEdit);
+        return "redirect:/detail/editDetailsFromSpecialty/" + httpSession.getAttribute("specialtyId");
+    }
 
     //todo deleteSpecialtyDetail
 

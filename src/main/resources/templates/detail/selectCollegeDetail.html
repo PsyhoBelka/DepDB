@@ -5,9 +5,16 @@
     <title>Specialty details</title>
 </head>
 <body style="background-color: palegoldenrod;">
+<h1 align="center">
+    Period:
+    <th:block th:text="${periodName}"></th:block>
+</h1>
 <h2 align="center">
     Select college to view:
 </h2>
+<h3 align="center">
+    (<a th:href="@{'/detail/selectperiod/'}" href="123">goBack</a>)
+</h3>
 <div>
     <table style="margin-left: auto; margin-right: auto;" border="1">
         <tbody>
@@ -27,6 +34,5 @@
     </table>
 </div>
 <p align="center"><a href="/"> Back to home</a></p>
-<p align="center"><a href="/detail"> Back to period selection</a></p>
 </body>
 </html>
