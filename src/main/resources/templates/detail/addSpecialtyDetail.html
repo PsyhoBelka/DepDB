@@ -6,8 +6,13 @@
 </head>
 <body style="background-color: palegoldenrod;">
 <h2 align="center">
-    Specialities details
+    <th:block th:text="${selectedCollege.name}"></th:block>
+    <br>
+    <th:block th:text="${selectedSpecialty.code +' - '+selectedSpecialty.name}"></th:block>
 </h2>
+<h3 align="center">
+    Specialities details
+</h3>
 <form id="newSpecialtyDetail" th:object="${specialtyDetailFormDTOToAdd}" action="/detail/specialtyDetailAdd"
       method="post">
     <div>

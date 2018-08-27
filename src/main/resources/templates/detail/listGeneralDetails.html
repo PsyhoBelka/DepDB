@@ -16,7 +16,9 @@
     <table style="margin-left: auto; margin-right: auto;" border="1">
         <tbody>
         <tr>
-            <td th:text="*{selectedCollege.getName()}" rowspan="2">college_name</td>
+            <td th:text="*{selectedCollege.getName()}"
+                rowspan="2" style="background-color:  powderblue;">college_name
+            </td>
             <td style="width: 250px; text-align: center;" colspan="2">License</td>
             <td style="width: 250px; text-align: center;" colspan="2">Order</td>
             <td style="width: 250px; text-align: center;" colspan="2">Real</td>
@@ -34,8 +36,10 @@
             <td style="width: 125px; text-align: center;">extra</td>
         </tr>
         <th:block th:each="specialty:*{GeneralInfoSpecialtyDTO}">
-            <tr>
-                <td th:text="${specialty.specialty.getName()}" style="width: 400px;">Specialty</td>
+            <tr style="background-color:floralwhite;">
+                <td th:text="${specialty.specialty.getCode()+' - '+specialty.specialty.getName()}"
+                    style="width: 400px;">Specialty
+                </td>
                 <td style="text-align: center;" colspan="2" th:text="${specialty.licenseCapacitySum}">spec_lic_sum</td>
                 <td style="text-align: center;" colspan="2" th:text="${specialty.regionOrderSum}">spec_order_sum</td>
                 <td style="width: 50px; text-align: center;" colspan="2" th:text="${specialty.realCapacitySum}">
@@ -55,37 +59,35 @@
                 </td>
             </tr>
             <tr>
-                <td>nine</td>
+                <td>на основі базової загальної середньої освіти</td>
                 <td style="text-align: center;" th:text="${specialty.licenseCapacityDay['NINE_CLASS']}">nine_day_lic
                 </td>
                 <td style="text-align: center;" th:text="${specialty.licenseCapacityEx['NINE_CLASS']}">nine_ex_lic</td>
                 <td style="text-align: center;" th:text="${specialty.regionOrderDay['NINE_CLASS']}">nine_day_order</td>
-                <td style="text-align: center;" th:text="${specialty.licenseCapacityEx['NINE_CLASS']}">nine_ex_order
-                </td>
+                <td style="text-align: center;" th:text="${specialty.regionOrderEx['NINE_CLASS']}">nine_ex_order</td>
                 <td style="text-align: center;" th:text="${specialty.realCapacityDay['NINE_CLASS']}">nine_day_real</td>
                 <td style="text-align: center;" th:text="${specialty.realCapacityEx['NINE_CLASS']}">nine_ex_real</td>
                 <td style="text-align: center;" th:text="${specialty.graduatedDay['NINE_CLASS']}">nine_day_grad</td>
                 <td style="text-align: center;" th:text="${specialty.graduatedEx['NINE_CLASS']}">nine_ex_grad</td>
             </tr>
             <tr>
-                <td>elev</td>
+                <td>на основі повної загальної середньої освіти</td>
                 <td style="text-align: center;" th:text="${specialty.licenseCapacityDay['ELEV_CLASS']}">nine_day_lic
                 </td>
                 <td style="text-align: center;" th:text="${specialty.licenseCapacityEx['ELEV_CLASS']}">nine_ex_lic</td>
                 <td style="text-align: center;" th:text="${specialty.regionOrderDay['ELEV_CLASS']}">nine_day_order</td>
-                <td style="text-align: center;" th:text="${specialty.licenseCapacityEx['ELEV_CLASS']}">nine_ex_order
-                </td>
+                <td style="text-align: center;" th:text="${specialty.regionOrderEx['ELEV_CLASS']}">nine_ex_order</td>
                 <td style="text-align: center;" th:text="${specialty.realCapacityDay['ELEV_CLASS']}">nine_day_real</td>
                 <td style="text-align: center;" th:text="${specialty.realCapacityEx['ELEV_CLASS']}">nine_ex_real</td>
                 <td style="text-align: center;" th:text="${specialty.graduatedDay['ELEV_CLASS']}">nine_day_grad</td>
                 <td style="text-align: center;" th:text="${specialty.graduatedEx['ELEV_CLASS']}">nine_ex_grad</td>
             </tr>
             <tr>
-                <td>kval</td>
+                <td>на основі ОКР кваліфікованого робітника</td>
                 <td style="text-align: center;" th:text="${specialty.licenseCapacityDay['KVAL_ROB']}">nine_day_lic</td>
                 <td style="text-align: center;" th:text="${specialty.licenseCapacityEx['KVAL_ROB']}">nine_ex_lic</td>
                 <td style="text-align: center;" th:text="${specialty.regionOrderDay['KVAL_ROB']}">nine_day_order</td>
-                <td style="text-align: center;" th:text="${specialty.licenseCapacityEx['KVAL_ROB']}">nine_ex_order</td>
+                <td style="text-align: center;" th:text="${specialty.regionOrderEx['KVAL_ROB']}">nine_ex_order</td>
                 <td style="text-align: center;" th:text="${specialty.realCapacityDay['KVAL_ROB']}">nine_day_real</td>
                 <td style="text-align: center;" th:text="${specialty.realCapacityEx['KVAL_ROB']}">nine_ex_real</td>
                 <td style="text-align: center;" th:text="${specialty.graduatedDay['KVAL_ROB']}">nine_day_grad</td>
@@ -94,7 +96,7 @@
 
         </th:block>
         <tr>
-            <td style="text-align: right;">college_sum</td>
+            <td style="text-align: right;"><b>Загалом по коледжу:</b></td>
             <td style="text-align: center;" colspan="2" th:text="*{licenseCapacitySum}"></td>
             <td style="text-align: center;" colspan="2" th:text="*{regionOrderCapacitySum}"></td>
             <td style="text-align: center;" colspan="2" th:text="*{realCapacitySum}"></td>

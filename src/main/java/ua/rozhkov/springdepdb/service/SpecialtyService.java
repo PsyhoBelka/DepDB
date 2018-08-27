@@ -39,4 +39,5 @@ public class SpecialtyService implements BaseService<Specialty, Long> {
         specialtyRepository.deleteById(id);
     }
 
+
 }

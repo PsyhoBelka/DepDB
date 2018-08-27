@@ -64,10 +64,9 @@ public class SpecialtyDetailService implements BaseService<SpecialtyDetail, Long
         specialtyDetailToAdd.setBase(Base.valueOf(specialtyDetailFormDTOToAdd.getSelectedBase()));
         specialtyDetailToAdd.setStudyForm(StudyForm.valueOf(specialtyDetailFormDTOToAdd.getSelectedStudyForm()));
         specialtyDetailToAdd.setLicenseCapacity(specialtyDetailFormDTOToAdd.getLicenseCapacity());
-        specialtyDetailToAdd.setRegionOrder(specialtyDetailFormDTOToAdd.getLicenseCapacity());
+        specialtyDetailToAdd.setRegionOrder(specialtyDetailFormDTOToAdd.getRegionOrder());
         specialtyDetailToAdd.setRealCapacity(specialtyDetailFormDTOToAdd.getRealCapacity());
         specialtyDetailToAdd.setGraduated(specialtyDetailFormDTOToAdd.getGraduated());
-        specialtyDetailToAdd.setRegionOrder(specialtyDetailFormDTOToAdd.getLicenseCapacity());
         specialty.getSpecialtyDetails().add(specialtyDetailToAdd);
         specialtyService.save(specialty);
     }
@@ -81,6 +80,7 @@ public class SpecialtyDetailService implements BaseService<SpecialtyDetail, Long
     public SpecialtyDetailFormDTO prepareSpecialtyDetailFormDTOToEdit(Long idSpecialtyDetails) {
         SpecialtyDetailFormDTO specialtyDetailFormDTOToEdit = new SpecialtyDetailFormDTO();
         SpecialtyDetail specialtyDetailToEdit = findById(idSpecialtyDetails);
+        specialtyDetailFormDTOToEdit.setId(specialtyDetailToEdit.getId());
         specialtyDetailFormDTOToEdit.setSelectedBase(String.valueOf(specialtyDetailToEdit.getBase()));
         specialtyDetailFormDTOToEdit.setSelectedStudyForm(String.valueOf(specialtyDetailToEdit.getStudyForm()));
         specialtyDetailFormDTOToEdit.setAvailableBases(Arrays.asList(Base.values()));
@@ -93,14 +93,13 @@ public class SpecialtyDetailService implements BaseService<SpecialtyDetail, Long
     }
 
     public void perfomSpecialtyDetailFormDTOEdit(SpecialtyDetailFormDTO specialtyDetailFormDTOToEdit) {
-        SpecialtyDetail specialtyDetailToEdit = new SpecialtyDetail();
+        SpecialtyDetail specialtyDetailToEdit = findById(specialtyDetailFormDTOToEdit.getId());
         specialtyDetailToEdit.setBase(Base.valueOf(specialtyDetailFormDTOToEdit.getSelectedBase()));
         specialtyDetailToEdit.setStudyForm(StudyForm.valueOf(specialtyDetailFormDTOToEdit.getSelectedStudyForm()));
         specialtyDetailToEdit.setLicenseCapacity(specialtyDetailFormDTOToEdit.getLicenseCapacity());
-        specialtyDetailToEdit.setRegionOrder(specialtyDetailFormDTOToEdit.getLicenseCapacity());
+        specialtyDetailToEdit.setRegionOrder(specialtyDetailFormDTOToEdit.getRegionOrder());
         specialtyDetailToEdit.setRealCapacity(specialtyDetailFormDTOToEdit.getRealCapacity());
         specialtyDetailToEdit.setGraduated(specialtyDetailFormDTOToEdit.getGraduated());
-        specialtyDetailToEdit.setRegionOrder(specialtyDetailFormDTOToEdit.getLicenseCapacity());
         save(specialtyDetailToEdit);
     }
 
@@ -118,5 +117,13 @@ public class SpecialtyDetailService implements BaseService<SpecialtyDetail, Long
         specialty.getColleges().remove(college);
         specialtyService.save(specialty);
         collegeService.save(college);
+    }
+
+    public void deleteSpecialtyDetail(Long id, Long specialtyId) {
+        Specialty specialty = specialtyService.findById(specialtyId);
+        SpecialtyDetail specialtyDetail = findById(id);
+        specialty.deleteSpecialtyDetail(specialtyDetail);
+        deleteById(specialtyDetail.getId());
+        specialtyService.save(specialty);
     }
 }

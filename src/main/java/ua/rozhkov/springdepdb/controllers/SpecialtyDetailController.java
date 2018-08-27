@@ -67,8 +67,10 @@ public class SpecialtyDetailController {
     }
 
     @RequestMapping("/addSpecialtyDetail/{id}")//id - id specialty
-    public String showAddSpecialtyDetailPage(@PathVariable Long id, Model model) {
+    public String showAddSpecialtyDetailPage(@PathVariable Long id, Model model, HttpSession httpSession) {
         model.addAttribute("specialtyDetailFormDTOToAdd", specialtyDetailService.prepareSpecialtyDetailFormDTOToAdd(id));
+        model.addAttribute("selectedCollege", collegeService.findById((Long) httpSession.getAttribute("collegeId")));
+        model.addAttribute("selectedSpecialty", specialtyService.findById((Long) httpSession.getAttribute("specialtyId")));
         return "detail/addSpecialtyDetail";
     }
 
@@ -94,7 +96,11 @@ public class SpecialtyDetailController {
         return "redirect:/detail/editDetailsFromSpecialty/" + httpSession.getAttribute("specialtyId");
     }
 
-    //todo deleteSpecialtyDetail
+    @RequestMapping("/deleteSpecialtyDetail/{id}")//id - specialtyDetail id
+    public String deleteSpecialtyDetail(@PathVariable Long id, HttpSession httpSession) {
+        specialtyDetailService.deleteSpecialtyDetail(id, (Long) httpSession.getAttribute("specialtyId"));
+        return "redirect:/detail/editDetailsFromSpecialty/" + httpSession.getAttribute("specialtyId");
+    }
 
     @RequestMapping("/deleteDetailsFromSpecialty/college/{collegeId}/specialty/{specialtyId}")
     public String deleteCollegeDetailWithSpecialty(@PathVariable Long collegeId, @PathVariable Long specialtyId, HttpSession httpSession) {

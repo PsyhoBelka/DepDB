@@ -30,7 +30,7 @@
                    th:value="${specialty.id}"/>
             <label
                     th:for="${#ids.prev('selectedSpecialties')}"
-                    th:text="${specialty.name}"></label>
+                    th:text="${specialty.code+' - '+specialty.name}"></label>
         </li>
     </ul>
     </p>
