@@ -1,6 +1,6 @@
 #FileLock
-#Mon Aug 27 13:33:16 EEST 2018
+#Wed Aug 29 13:04:32 EEST 2018
 hostName=PB-PC
-id=1657af1d7f6608042843ee1c69f4eb0d57400b668d2
+id=165852441bed249dff52384b1cbd21de33e47728ca0
 method=file
-server=169.254.172.139\:53504
+server=169.254.172.139\:60211
