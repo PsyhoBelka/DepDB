@@ -1,4 +1,6 @@
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <meta charset="UTF-8">
     <title>HomePage</title>
@@ -26,6 +28,17 @@
     </tr>
     </tbody>
 </table>
+
+<p align="center">
+    <span sec:authorize="isAuthenticated()">
+        Logged user: <span sec:authentication="name"></span>
+        | Roles: <span sec:authentication="principal.authorities"></span>
+        | <a th:href="@{/logout}">Log Out</a>
+    </span>
+    <span sec:authorize="!isAuthenticated()">
+        <a href="/login">Log In</a>
+    </span>
+</p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
